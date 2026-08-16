@@ -1,0 +1,117 @@
+/* Responsive — PropTech Emlak Yönetim */
+
+@media (max-width: 1400px) {
+  .kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1200px) {
+  .grid-2, .detail-hero { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 992px) {
+  :root { --sidebar-w: 0px; }
+
+  .sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-backdrop.open { display: block; }
+
+  .main { margin-left: 0; }
+  .menu-toggle { display: grid; }
+
+  .user-meta { display: none; }
+  .search-trigger { max-width: none; }
+  .search-trigger span { display: none; }
+  .search-trigger kbd { display: none; }
+
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chat-layout { grid-template-columns: 1fr; height: auto; min-height: 560px; }
+  .chat-channels { max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); }
+
+  .mobile-nav { display: grid; }
+  .content { padding: 16px 14px calc(var(--mobile-nav-h) + 16px); }
+
+  .form-grid, .form-grid.cols-3, .form-grid.cols-4, .info-list {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 { font-size: 20px; }
+  .gallery-main { height: 220px; }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi-value { font-size: 18px; }
+  .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .header { padding: 0 12px; gap: 8px; }
+  .content { padding: 12px 10px calc(var(--mobile-nav-h) + 12px); }
+  .prop-grid { grid-template-columns: 1fr; }
+  .modal { width: calc(100vw - 16px); max-height: calc(100vh - 24px); border-radius: 16px; }
+  .drawer { width: 100vw; }
+  .toast-stack { left: 12px; right: 12px; top: 12px; }
+  .toast { min-width: 0; max-width: none; }
+  .notif-panel { width: min(360px, calc(100vw - 24px)); right: -40px; }
+  .page-actions { width: 100%; }
+  .page-actions .btn { flex: 1; }
+  .match-item { grid-template-columns: 56px 1fr; }
+  .match-score { grid-column: 2; justify-self: start; }
+  .kanban-col { min-width: 220px; }
+  table.data { font-size: 12px; }
+  .btn { padding: 9px 12px; }
+}
+
+/* Field advisor mobile experience */
+.field-home .kpi-grid { grid-template-columns: 1fr 1fr; }
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.quick-action {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.quick-action strong { display: block; font-size: 13px; margin-top: 8px; }
+.quick-action span { font-size: 11px; color: var(--muted); }
+
+.wizard-steps {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.wizard-step {
+  flex: 1;
+  min-width: 72px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--muted);
+}
+.wizard-step.active {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+}
+.wizard-step.done {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+@media (min-width: 993px) {
+  .mobile-nav { display: none !important; }
+  .content { padding-bottom: 22px; }
+}

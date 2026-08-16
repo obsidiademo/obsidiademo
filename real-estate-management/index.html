@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>EmlakPro — Gayrimenkul Yönetim Platformu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">EP</div>
+        <div class="brand-text">
+          <strong>EmlakPro</strong>
+          <span>PropTech SaaS</span>
+        </div>
+      </div>
+      <div class="demo-link">
+        <strong>Son Kullanıcı Vitrini</strong>
+        <span>Sahibinden tarzı ilan sitesi · 10 tema</span>
+        <a href="public/index.html" target="_blank" rel="noopener">Demoya Git →</a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <div class="nav-group-title">Genel</div>
+          <button class="nav-item active" data-route="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</button>
+          <button class="nav-item" data-route="properties"><i data-lucide="building-2"></i> Portföyler</button>
+          <button class="nav-item" data-route="map"><i data-lucide="map"></i> Harita</button>
+          <button class="nav-item" data-route="calendar"><i data-lucide="calendar"></i> Takvim</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">CRM</div>
+          <button class="nav-item" data-route="leads"><i data-lucide="filter"></i> Leadler</button>
+          <button class="nav-item" data-route="customers"><i data-lucide="users"></i> Müşteriler</button>
+          <button class="nav-item" data-route="owners"><i data-lucide="user-cog"></i> Mülk Sahipleri</button>
+          <button class="nav-item" data-route="requests"><i data-lucide="sparkles"></i> Talepler</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Satış</div>
+          <button class="nav-item" data-route="appointments"><i data-lucide="calendar-check"></i> Randevular</button>
+          <button class="nav-item" data-route="showings"><i data-lucide="map-pinned"></i> Yer Göstermeler</button>
+          <button class="nav-item" data-route="offers"><i data-lucide="handshake"></i> Teklifler</button>
+          <button class="nav-item" data-route="sales"><i data-lucide="badge-check"></i> Satış Süreçleri</button>
+          <button class="nav-item" data-route="rentals"><i data-lucide="key"></i> Kiralama Süreçleri</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Mülk Yönetimi</div>
+          <button class="nav-item" data-route="tenants"><i data-lucide="user"></i> Kiracılar</button>
+          <button class="nav-item" data-route="rents"><i data-lucide="wallet"></i> Kira Takibi</button>
+          <button class="nav-item" data-route="deposits"><i data-lucide="shield"></i> Depozitolar</button>
+          <button class="nav-item" data-route="contracts"><i data-lucide="file-text"></i> Sözleşmeler</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Finans</div>
+          <button class="nav-item" data-route="collections"><i data-lucide="banknote"></i> Tahsilatlar</button>
+          <button class="nav-item" data-route="commissions"><i data-lucide="coins"></i> Komisyonlar</button>
+          <button class="nav-item" data-route="primes"><i data-lucide="award"></i> Danışman Primleri</button>
+          <button class="nav-item" data-route="cash"><i data-lucide="landmark"></i> Kasa</button>
+          <button class="nav-item" data-route="income"><i data-lucide="pie-chart"></i> Gelir/Gider</button>
+          <button class="nav-item" data-route="accounts"><i data-lucide="book-open"></i> Cari Hesaplar</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Operasyon</div>
+          <button class="nav-item" data-route="tasks"><i data-lucide="check-square"></i> Görevler</button>
+          <button class="nav-item" data-route="documents"><i data-lucide="folder"></i> Belgeler</button>
+          <button class="nav-item" data-route="messages"><i data-lucide="message-square"></i> Mesajlar</button>
+          <button class="nav-item" data-route="notifications"><i data-lucide="bell"></i> Bildirimler <span class="badge-count" id="navNotifCount"></span></button>
+          <button class="nav-item" data-route="field"><i data-lucide="radar"></i> Saha Ekibi</button>
+          <button class="nav-item" data-route="advisor"><i data-lucide="smartphone"></i> Danışman Paneli</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Yönetim</div>
+          <button class="nav-item" data-route="agents"><i data-lucide="briefcase"></i> Danışmanlar</button>
+          <button class="nav-item" data-route="branches"><i data-lucide="git-branch"></i> Şubeler</button>
+          <button class="nav-item" data-route="users"><i data-lucide="users-round"></i> Kullanıcılar</button>
+          <button class="nav-item" data-route="roles"><i data-lucide="shield-check"></i> Roller</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Raporlar</div>
+          <button class="nav-item" data-route="report-portfolio"><i data-lucide="bar-chart-3"></i> Portföy</button>
+          <button class="nav-item" data-route="report-lead"><i data-lucide="trending-up"></i> Lead</button>
+          <button class="nav-item" data-route="report-agent"><i data-lucide="user-check"></i> Danışman</button>
+          <button class="nav-item" data-route="report-finance"><i data-lucide="line-chart"></i> Finans</button>
+          <button class="nav-item" data-route="report-region"><i data-lucide="map"></i> Bölge</button>
+          <button class="nav-item" data-route="report-branch"><i data-lucide="building"></i> Şube</button>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Sistem</div>
+          <button class="nav-item" data-route="scenario"><i data-lucide="play"></i> Senaryo Demo</button>
+          <button class="nav-item" data-route="settings"><i data-lucide="settings"></i> Ayarlar</button>
+          <button class="nav-item" data-route="integrations"><i data-lucide="plug"></i> Entegrasyonlar</button>
+          <button class="nav-item" data-route="logs"><i data-lucide="scroll-text"></i> Loglar</button>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Menü"><i data-lucide="menu"></i></button>
+        <button class="search-trigger" id="searchTrigger">
+          <i data-lucide="search"></i>
+          <span>Portföy, müşteri, telefon, ada/parsel ara...</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <div class="header-actions">
+          <button class="icon-btn" id="themeBtn" title="Tema"><i data-lucide="moon"></i></button>
+          <button class="icon-btn" id="notifBtn" title="Bildirimler">
+            <i data-lucide="bell"></i>
+            <span class="dot" id="notifDot"></span>
+          </button>
+          <div class="notif-panel" id="notifPanel"></div>
+          <button class="user-chip" id="userChip">
+            <div class="avatar">AY</div>
+            <div class="user-meta"><strong>Ahmet Yılmaz</strong><span>Emlak Danışmanı · Bakırköy</span></div>
+            <i data-lucide="chevron-down" style="width:16px;height:16px"></i>
+          </button>
+          <div class="profile-menu" id="profileMenu">
+            <button onclick="REMS.Router.go('profile')">Profil</button>
+            <button onclick="REMS.Router.go('settings')">Hesabım</button>
+            <button onclick="REMS.Router.go('notifications')">Bildirim Ayarları</button>
+            <button onclick="REMS.Pages.toggleTheme()">Tema Değiştir</button>
+            <button onclick="REMS.toast('Oturum demo modunda')">Çıkış</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content" id="appContent"></main>
+    </div>
+  </div>
+
+  <nav class="mobile-nav">
+    <button data-route="dashboard" class="active"><i data-lucide="home"></i> Ana Sayfa</button>
+    <button data-route="properties"><i data-lucide="building-2"></i> Portföy</button>
+    <button data-route="leads"><i data-lucide="filter"></i> Lead</button>
+    <button data-route="calendar"><i data-lucide="calendar"></i> Takvim</button>
+    <button data-route="profile"><i data-lucide="user"></i> Profil</button>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="modal"></div>
+  <div class="drawer" id="drawer"></div>
+  <div class="toast-stack" id="toastStack"></div>
+
+  <div class="cmdk" id="cmdk">
+    <input type="text" id="cmdkInput" placeholder="Portföy no, müşteri, telefon, danışman, mahalle, ada, parsel...">
+    <div class="cmdk-results" id="cmdkResults"></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales/tr.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/properties.js"></script>
+  <script src="js/crm.js"></script>
+  <script src="js/leads.js"></script>
+  <script src="js/appointments.js"></script>
+  <script src="js/finance.js"></script>
+  <script src="js/contracts.js"></script>
+  <script src="js/messages.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/maps.js"></script>
+  <script>
+    (function boot() {
+      REMS.Store.load();
+      if (REMS.Store.data.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      REMS.UI.updateUserChip();
+      REMS.UI.updateNotifBadge();
+
+      document.querySelectorAll('.nav-item, .mobile-nav button').forEach(btn => {
+        btn.addEventListener('click', () => REMS.Router.go(btn.dataset.route));
+      });
+
+      document.getElementById('menuToggle').onclick = () => {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarBackdrop').classList.toggle('open');
+      };
+      document.getElementById('sidebarBackdrop').onclick = () => {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarBackdrop').classList.remove('open');
+      };
+      document.getElementById('overlay').onclick = () => REMS.UI.closeOverlays();
+
+      document.getElementById('themeBtn').onclick = () => REMS.Pages.toggleTheme();
+
+      document.getElementById('notifBtn').onclick = (e) => {
+        e.stopPropagation();
+        const panel = document.getElementById('notifPanel');
+        const open = panel.classList.toggle('open');
+        document.getElementById('profileMenu').classList.remove('open');
+        if (open) {
+          panel.innerHTML = `<div class="card-header"><h3>Bildirimler</h3>
+            <button class="btn btn-sm btn-ghost" onclick="REMS.Pages.markAllRead()">Tümü okundu</button></div>
+            <div class="notif-list">${REMS.Store.data.notifications.slice(0,12).map(n => `
+              <div class="notif-item ${n.read?'':'unread'}" onclick="REMS.Pages.readNotif('${n.id}');REMS.Router.go('notifications')">
+                <strong>${n.title}</strong><p>${n.body}</p>
+                <div class="text-muted" style="font-size:11px">${n.at}</div>
+              </div>`).join('')}</div>`;
+        }
+      };
+
+      document.getElementById('userChip').onclick = (e) => {
+        e.stopPropagation();
+        document.getElementById('profileMenu').classList.toggle('open');
+        document.getElementById('notifPanel').classList.remove('open');
+      };
+
+      document.addEventListener('click', () => {
+        document.getElementById('notifPanel').classList.remove('open');
+        document.getElementById('profileMenu').classList.remove('open');
+      });
+
+      const openCmdk = () => {
+        const cmdk = document.getElementById('cmdk');
+        cmdk.classList.add('open');
+        document.getElementById('overlay').classList.add('open');
+        const input = document.getElementById('cmdkInput');
+        input.value = '';
+        input.focus();
+        renderCmdk('');
+      };
+      document.getElementById('searchTrigger').onclick = openCmdk;
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          openCmdk();
+        }
+        if (e.key === 'Escape') REMS.UI.closeOverlays();
+      });
+      document.getElementById('cmdkInput').oninput = (e) => renderCmdk(e.target.value);
+
+      function renderCmdk(q) {
+        q = (q || '').toLowerCase().trim();
+        const d = REMS.Store.data;
+        const results = [];
+        d.properties.forEach(p => {
+          const hay = `${p.code} ${p.title} ${p.address.mahalle} ${p.address.ilce} ${p.land?.ada||''} ${p.land?.parsel||''}`.toLowerCase();
+          if (!q || hay.includes(q)) results.push({ type: 'Portföy', title: p.code, sub: p.title, action: () => REMS.Router.go('property-detail', { id: p.id }) });
+        });
+        d.customers.forEach(c => {
+          const hay = `${c.name} ${c.phone}`.toLowerCase();
+          if (!q || hay.includes(q)) results.push({ type: 'Müşteri', title: c.name, sub: c.phone, action: () => { REMS.UI.closeOverlays(); REMS.CRM.customerDetail(c.id); } });
+        });
+        d.owners.forEach(o => {
+          const hay = `${o.name} ${o.phone}`.toLowerCase();
+          if (!q || hay.includes(q)) results.push({ type: 'Mülk Sahibi', title: o.name, sub: o.phone, action: () => { REMS.UI.closeOverlays(); REMS.CRM.ownerDetail(o.id); } });
+        });
+        d.agents.forEach(a => {
+          if (!q || a.name.toLowerCase().includes(q)) results.push({ type: 'Danışman', title: a.name, sub: a.role, action: () => REMS.Router.go('agents') });
+        });
+        const box = document.getElementById('cmdkResults');
+        box.innerHTML = results.slice(0, 20).map((r, i) => `
+          <button class="cmdk-item" data-i="${i}"><div><strong>${r.title}</strong><span>${r.type} · ${r.sub}</span></div></button>
+        `).join('') || '<div class="cmdk-item"><strong>Sonuç yok</strong></div>';
+        box.querySelectorAll('.cmdk-item').forEach((el, i) => {
+          el.onclick = () => { REMS.UI.closeOverlays(); results[i]?.action(); };
+        });
+      }
+
+      window.addEventListener('hashchange', () => REMS.Router.parse());
+      REMS.Router.parse();
+      if (window.lucide) lucide.createIcons();
+    })();
+  </script>
+</body>
+</html>
