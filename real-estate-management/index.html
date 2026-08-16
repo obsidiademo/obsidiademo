@@ -92,6 +92,7 @@
           <button class="nav-item" data-route="scenario"><i data-lucide="play"></i> Senaryo Demo</button>
           <button class="nav-item" data-route="settings"><i data-lucide="settings"></i> Ayarlar</button>
           <button class="nav-item" data-route="integrations"><i data-lucide="plug"></i> Entegrasyonlar</button>
+          <button class="nav-item" data-route="eids"><i data-lucide="shield-check"></i> EİDS Entegrasyon</button>
           <button class="nav-item" data-route="logs"><i data-lucide="scroll-text"></i> Loglar</button>
         </div>
         <div class="sidebar-credit">
@@ -272,6 +273,9 @@
         });
         if (!q || q.includes('ai') || q.includes('analiz') || q.includes('yapay')) {
           results.unshift({ type: 'Modül', title: 'AI Portföy Analizi', sub: 'Fiyat · talep · yaşlanma', action: () => REMS.Router.go('ai-analysis') });
+        }
+        if (!q || q.includes('eids') || q.includes('doğrulama') || q.includes('edevlet') || q.includes('e-devlet') || q.includes('ticaret')) {
+          results.unshift({ type: 'Modül', title: 'EİDS Entegrasyon', sub: 'Elektronik İlan Doğrulama', action: () => REMS.Router.go('eids') });
         }
         const box = document.getElementById('cmdkResults');
         box.innerHTML = results.slice(0, 20).map((r, i) => `

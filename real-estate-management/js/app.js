@@ -8,6 +8,7 @@ REMS.Store = {
       const raw = localStorage.getItem(REMS.CONST.STORAGE_KEY);
       if (raw) {
         this.data = JSON.parse(raw);
+        this.migrate();
         return this.data;
       }
     } catch (e) {
@@ -16,6 +17,31 @@ REMS.Store = {
     this.data = REMS.generateSeed();
     this.save();
     return this.data;
+  },
+  migrate() {
+    if (!this.data.settings) this.data.settings = {};
+    if (!this.data.settings.integrations) this.data.settings.integrations = {};
+    if (!this.data.settings.integrations.eids) {
+      this.data.settings.integrations.eids = { enabled: false, apiKey: '' };
+    }
+    if (!this.data.settings.eids) {
+      this.data.settings.eids = {
+        enabled: false,
+        firmaKod: 'EIDS-DEMO-8F3A2C1B',
+        vergiNo: '6120345678',
+        yetkiBelgeNo: 'TR-34-2024-001842',
+        returnUrl: 'https://emlakpro.local/eids/callback',
+        environment: 'Test',
+        ssoConnected: false,
+        lastSyncAt: null
+      };
+    }
+    if (!Array.isArray(this.data.eidsLogs)) this.data.eidsLogs = [];
+    if (!Array.isArray(this.data.eidsVerifications)) {
+      this.data.eidsVerifications = [];
+    }
+    // Ensure properties have eidsStatus field lazily when queried
+    this.save();
   },
   save() {
     localStorage.setItem(REMS.CONST.STORAGE_KEY, JSON.stringify(this.data));
@@ -327,6 +353,7 @@ REMS.Router = {
       'report-branch': () => REMS.Reports.branch(),
       settings: () => REMS.Pages.settings(),
       integrations: () => REMS.Pages.integrations(),
+      eids: () => REMS.Pages.eids(),
       logs: () => REMS.Pages.logs(),
       field: () => REMS.Pages.fieldTeam(),
       advisor: () => REMS.Pages.advisorMobile(),
@@ -761,23 +788,287 @@ REMS.Pages.resetData = function () {
 
 REMS.Pages.integrations = function () {
   const integ = REMS.Store.data.settings.integrations;
+  const labels = {
+    sahibinden: 'Sahibinden',
+    hepsiemlak: 'Hepsiemlak',
+    emlakjet: 'Emlakjet',
+    netgsm: 'Netgsm SMS',
+    whatsapp: 'WhatsApp Business',
+    iyzico: 'iyzico / PayTR',
+    eids: 'EİDS (Ticaret Bakanlığı)'
+  };
   const rows = Object.entries(integ).map(([key, val]) => `
     <div class="channel-row">
-      <div><strong>${key}</strong><div class="text-muted" style="font-size:11px">API anahtarı demo ortamında saklanmaz / hard-code edilmez</div></div>
-      <button class="toggle ${val.enabled ? 'on' : ''}" onclick="REMS.Pages.toggleInteg('${key}')"></button>
+      <div>
+        <strong>${labels[key] || key}</strong>
+        <div class="text-muted" style="font-size:11px">API anahtarı demo ortamında saklanmaz / hard-code edilmez</div>
+      </div>
+      <div class="flex-center gap-8">
+        ${key === 'eids' ? `<button class="btn btn-sm btn-outline" onclick="REMS.Router.go('eids')">Yönet</button>` : ''}
+        <button class="toggle ${val.enabled ? 'on' : ''}" onclick="REMS.Pages.toggleInteg('${key}')"></button>
+      </div>
     </div>`).join('');
   return `
-  <div class="page-header"><div><h1>Entegrasyonlar</h1><p>Portal, SMS, WhatsApp, ödeme — mimari hazır</p></div></div>
+  <div class="page-header"><div><h1>Entegrasyonlar</h1><p>Portal, SMS, WhatsApp, ödeme ve EİDS — mimari hazır</p></div>
+    <div class="page-actions"><button class="btn btn-primary" onclick="REMS.Router.go('eids')"><i data-lucide="shield-check"></i> EİDS Entegrasyon</button></div>
+  </div>
   <div class="card card-body">${rows}
-    <p class="text-muted mt-16" style="font-size:12px">Backend: NestJS/Laravel · PostgreSQL · Redis · S3 · Socket.IO · Netgsm · Meta WhatsApp · iyzico/PayTR</p>
+    <p class="text-muted mt-16" style="font-size:12px">Backend: NestJS/Laravel · PostgreSQL · Redis · S3 · Socket.IO · Netgsm · Meta WhatsApp · iyzico/PayTR · EİDS / e-Devlet SSO</p>
   </div>`;
 };
 
 REMS.Pages.toggleInteg = function (key) {
   const i = REMS.Store.data.settings.integrations[key];
   i.enabled = !i.enabled;
+  if (key === 'eids') {
+    REMS.Store.data.settings.eids.enabled = i.enabled;
+  }
   REMS.Store.save();
   REMS.toast(`${key} ${i.enabled ? 'aktif' : 'pasif'}`);
+  REMS.Router.render();
+};
+
+REMS.Pages.eids = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  const props = REMS.Store.data.properties.filter(p =>
+    ['Aktif', 'Yeni', 'Teklif Var', 'Opsiyonlu'].includes(p.status)
+  );
+  const verified = props.filter(p => p.eidsStatus === 'Doğrulandı').length;
+  const pending = props.filter(p => !p.eidsStatus || p.eidsStatus === 'Bekliyor').length;
+  const rejected = props.filter(p => p.eidsStatus === 'Reddedildi').length;
+  const logs = (REMS.Store.data.eidsLogs || []).slice(0, 12);
+
+  return `
+  <div class="page-header">
+    <div>
+      <h1><i data-lucide="shield-check" style="width:22px;height:22px;display:inline;vertical-align:-3px"></i> EİDS Entegrasyon</h1>
+      <p>Elektronik İlan Doğrulama Sistemi · Ticaret Bakanlığı / e-Devlet</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-outline" onclick="REMS.Pages.eidsSyncAll()"><i data-lucide="refresh-cw"></i> Toplu Doğrula</button>
+      <button class="btn btn-primary" onclick="REMS.Pages.eidsToggle()">${cfg.enabled ? 'Entegrasyonu Durdur' : 'Entegrasyonu Başlat'}</button>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">Bağlantı</div><div class="kpi-value" style="font-size:18px">${cfg.enabled ? (cfg.ssoConnected ? 'Aktif' : 'Bekliyor') : 'Kapalı'}</div>
+      <div class="kpi-sub">${cfg.environment} ortamı</div></div>
+    <div class="kpi-card"><div class="kpi-label">Doğrulanan Portföy</div><div class="kpi-value">${verified}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Bekleyen</div><div class="kpi-value">${pending}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Red / Hata</div><div class="kpi-value">${rejected}</div></div>
+  </div>
+
+  <div class="grid-2 mt-16">
+    <div class="card">
+      <div class="card-header"><h3>Firma & Bağlantı Ayarları</h3>
+        <span class="badge ${cfg.enabled ? 'badge-success' : 'badge-warning'}">${cfg.enabled ? 'Aktif' : 'Pasif'}</span>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Firma Kodu</label>
+            <input class="form-control" id="eidsFirmaKod" value="${cfg.firmaKod || ''}"></div>
+          <div class="form-group"><label>Vergi No</label>
+            <input class="form-control" id="eidsVergiNo" value="${cfg.vergiNo || ''}"></div>
+          <div class="form-group"><label>Yetki Belge No</label>
+            <input class="form-control" id="eidsYetkiBelge" value="${cfg.yetkiBelgeNo || ''}"></div>
+          <div class="form-group"><label>Ortam</label>
+            <select class="form-control" id="eidsEnv">
+              <option ${cfg.environment==='Test'?'selected':''}>Test</option>
+              <option ${cfg.environment==='Prod'?'selected':''}>Prod</option>
+            </select></div>
+          <div class="form-group" style="grid-column:1/-1"><label>Return URL (e-Devlet SSO)</label>
+            <input class="form-control" id="eidsReturnUrl" value="${cfg.returnUrl || ''}"></div>
+        </div>
+        <div class="page-actions mt-16">
+          <button class="btn btn-outline" onclick="REMS.Pages.eidsSave()"><i data-lucide="save"></i> Kaydet</button>
+          <button class="btn btn-primary" onclick="REMS.Pages.eidsSso()"><i data-lucide="log-in"></i> e-Devlet SSO Simüle Et</button>
+        </div>
+        <p class="text-muted mt-16" style="font-size:12px">
+          Son senkron: ${cfg.lastSyncAt || '—'} · SSO: ${cfg.ssoConnected ? 'Bağlı' : 'Bağlı değil'}
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>Yetki Sorgusu</h3></div>
+      <div class="card-body">
+        <p class="text-muted" style="font-size:13px;margin-bottom:12px">Portföy seçerek EİDS üzerinden taşınmaz ilan yetkisini sorgulayın (demo çıkarım).</p>
+        <div class="form-group"><label>Portföy</label>
+          <select class="form-control" id="eidsPropSelect">
+            ${props.map(p => `<option value="${p.id}">${p.code} · ${p.address.ilce} · ${p.title.slice(0,28)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group mt-16"><label>Taşınmaz / İlan No (opsiyonel)</label>
+          <input class="form-control" id="eidsTasinmazNo" placeholder="Örn. ada/parsel veya EİDS taşınmaz no">
+        </div>
+        <button class="btn btn-primary mt-16" onclick="REMS.Pages.eidsQuery()"><i data-lucide="search"></i> Yetki Sorgula</button>
+        <div id="eidsQueryResult" class="mt-16"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-16">
+    <div class="card-header"><h3>Portföy Doğrulama Durumları</h3>
+      <button class="btn btn-sm btn-outline" onclick="REMS.Pages.eidsSyncAll()">Yenile</button>
+    </div>
+    <div class="table-wrap"><table class="data"><thead><tr>
+      <th>Portföy</th><th>Bölge</th><th>İşlem</th><th>Ada/Parsel</th><th>EİDS Durum</th><th>Yetki</th><th></th>
+    </tr></thead><tbody>
+    ${props.slice(0, 25).map(p => {
+      const st = p.eidsStatus || 'Bekliyor';
+      const badge = st === 'Doğrulandı' ? 'badge-success' : st === 'Reddedildi' ? 'badge-danger' : 'badge-warning';
+      return `<tr>
+        <td><strong>${p.code}</strong><div class="text-muted" style="font-size:11px">${p.title.slice(0,32)}…</div></td>
+        <td>${p.address.ilce}</td>
+        <td>${p.transactionType}</td>
+        <td>${p.land?.ada || '—'} / ${p.land?.parsel || '—'}</td>
+        <td><span class="badge ${badge}">${st}</span></td>
+        <td>${p.eidsYetki || p.authorityType || '—'}</td>
+        <td><button class="btn btn-sm btn-outline" onclick="REMS.Pages.eidsVerifyOne('${p.id}')">Doğrula</button></td>
+      </tr>`;
+    }).join('')}
+    </tbody></table></div>
+  </div>
+
+  <div class="card mt-16">
+    <div class="card-header"><h3>EİDS İşlem Logları</h3></div>
+    <div class="table-wrap"><table class="data"><thead><tr>
+      <th>Zaman</th><th>İşlem</th><th>Detay</th><th>Durum</th>
+    </tr></thead><tbody>
+    ${logs.map(l => `<tr>
+      <td>${l.at}</td><td>${l.action}</td><td>${l.detail || ''}</td>
+      <td><span class="badge ${l.status==='Başarılı'?'badge-success':l.status==='Hata'?'badge-danger':'badge-warning'}">${l.status}</span></td>
+    </tr>`).join('') || '<tr><td colspan="4" class="text-muted">Log yok</td></tr>'}
+    </tbody></table></div>
+    <div class="card-body">
+      <p class="text-muted" style="font-size:12px">Demo notu: Gerçek ortamda firmaKod / kullaniciKodu Ticaret Bakanlığı EİDS API üzerinden alınır; API anahtarları istemciye hard-code edilmez.</p>
+    </div>
+  </div>`;
+};
+
+REMS.Pages.eidsLog = function (action, detail, status = 'Başarılı') {
+  REMS.Store.data.eidsLogs = REMS.Store.data.eidsLogs || [];
+  REMS.Store.data.eidsLogs.unshift({
+    id: REMS.uid('el'),
+    at: new Date().toISOString().slice(0, 16).replace('T', ' '),
+    action,
+    detail,
+    status
+  });
+  REMS.log(action, detail);
+};
+
+REMS.Pages.eidsToggle = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  cfg.enabled = !cfg.enabled;
+  REMS.Store.data.settings.integrations.eids.enabled = cfg.enabled;
+  if (!cfg.enabled) cfg.ssoConnected = false;
+  REMS.Pages.eidsLog('Entegrasyon durumu', cfg.enabled ? 'EİDS aktif edildi' : 'EİDS pasif edildi');
+  REMS.Store.save();
+  REMS.toast(cfg.enabled ? 'EİDS entegrasyonu açıldı' : 'EİDS entegrasyonu kapatıldı');
+  REMS.Router.render();
+};
+
+REMS.Pages.eidsSave = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  cfg.firmaKod = document.getElementById('eidsFirmaKod')?.value?.trim() || cfg.firmaKod;
+  cfg.vergiNo = document.getElementById('eidsVergiNo')?.value?.trim() || cfg.vergiNo;
+  cfg.yetkiBelgeNo = document.getElementById('eidsYetkiBelge')?.value?.trim() || cfg.yetkiBelgeNo;
+  cfg.environment = document.getElementById('eidsEnv')?.value || cfg.environment;
+  cfg.returnUrl = document.getElementById('eidsReturnUrl')?.value?.trim() || cfg.returnUrl;
+  REMS.Pages.eidsLog('Ayar kaydı', `Firma ${cfg.firmaKod} · ${cfg.environment}`);
+  REMS.Store.save();
+  REMS.toast('EİDS ayarları kaydedildi');
+};
+
+REMS.Pages.eidsSso = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  if (!cfg.enabled) {
+    REMS.toast('Önce EİDS entegrasyonunu başlatın', 'error');
+    return;
+  }
+  REMS.UI.openModal(`
+    <div class="modal-header"><h2>e-Devlet SSO</h2><button class="icon-btn" data-close><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <p style="font-weight:550;line-height:1.55">Kullanıcı e-Devlet üzerinden yönlendirilecek ve dönüşte <code>yetkiKodu</code> alınacaktır.</p>
+      <div class="info-list mt-16">
+        <div><span>Firma Kodu</span><strong>${cfg.firmaKod}</strong></div>
+        <div><span>Return URL</span><strong style="font-size:11px">${cfg.returnUrl}</strong></div>
+        <div><span>Ortam</span><strong>${cfg.environment}</strong></div>
+      </div>
+      <p class="text-muted mt-16" style="font-size:12px">Demo: Gerçek SSO çağrısı yapılmaz; bağlantı başarılı simüle edilir.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" data-close>İptal</button>
+      <button class="btn btn-primary" onclick="REMS.Pages.eidsSsoComplete()">Doğrulamayı Tamamla</button>
+    </div>`);
+};
+
+REMS.Pages.eidsSsoComplete = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  cfg.ssoConnected = true;
+  cfg.lastSyncAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
+  REMS.Pages.eidsLog('e-Devlet SSO', 'yetkiKodu alındı · kullaniciKodu üretildi');
+  REMS.notify('EİDS SSO', 'e-Devlet bağlantısı başarıyla tamamlandı.', 'eids');
+  REMS.Store.save();
+  REMS.UI.closeOverlays();
+  REMS.toast('e-Devlet SSO tamamlandı');
+  REMS.Router.render();
+};
+
+REMS.Pages.eidsVerifyOne = function (propertyId) {
+  const cfg = REMS.Store.data.settings.eids;
+  if (!cfg.enabled) return REMS.toast('EİDS kapalı', 'error');
+  if (!cfg.ssoConnected) return REMS.toast('Önce e-Devlet SSO tamamlayın', 'error');
+  const p = REMS.find.property(propertyId);
+  if (!p) return;
+  const ok = p.authorityType === 'Tek Yetkili' || (p.daysOnMarket || 0) < 90;
+  p.eidsStatus = ok ? 'Doğrulandı' : 'Reddedildi';
+  p.eidsYetki = ok ? (p.authorityType || 'Yetkili İşletme') : 'Yetki bulunamadı';
+  p.eidsCheckedAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
+  cfg.lastSyncAt = p.eidsCheckedAt;
+  REMS.Pages.eidsLog('Yetki sorgusu', `${p.code} · ${p.eidsStatus}`, ok ? 'Başarılı' : 'Hata');
+  REMS.Store.save();
+  REMS.toast(`${p.code}: ${p.eidsStatus}`);
+  REMS.Router.render();
+};
+
+REMS.Pages.eidsQuery = function () {
+  const id = document.getElementById('eidsPropSelect')?.value;
+  if (!id) return;
+  REMS.Pages.eidsVerifyOne(id);
+  const p = REMS.find.property(id);
+  const box = document.getElementById('eidsQueryResult');
+  if (box && p) {
+    box.innerHTML = `<div class="card card-body" style="background:var(--bg-soft)">
+      <div class="stat-row"><span>Portföy</span><strong>${p.code}</strong></div>
+      <div class="stat-row"><span>Durum</span><strong>${p.eidsStatus}</strong></div>
+      <div class="stat-row"><span>Yetki</span><strong>${p.eidsYetki || '—'}</strong></div>
+      <div class="stat-row"><span>Kontrol</span><strong>${p.eidsCheckedAt || '—'}</strong></div>
+    </div>`;
+  }
+};
+
+REMS.Pages.eidsSyncAll = function () {
+  const cfg = REMS.Store.data.settings.eids;
+  if (!cfg.enabled) return REMS.toast('EİDS kapalı', 'error');
+  if (!cfg.ssoConnected) return REMS.toast('Önce e-Devlet SSO tamamlayın', 'error');
+  const props = REMS.Store.data.properties.filter(p =>
+    ['Aktif', 'Yeni', 'Teklif Var', 'Opsiyonlu'].includes(p.status)
+  );
+  let ok = 0;
+  props.forEach(p => {
+    const pass = p.authorityType === 'Tek Yetkili' || (p.qualityScore?.total || 0) >= 70;
+    p.eidsStatus = pass ? 'Doğrulandı' : 'Bekliyor';
+    p.eidsYetki = pass ? (p.authorityType || 'Yetkili İşletme') : 'Kontrol gerekli';
+    p.eidsCheckedAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
+    if (pass) ok += 1;
+  });
+  cfg.lastSyncAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
+  REMS.Pages.eidsLog('Toplu doğrulama', `${ok}/${props.length} portföy doğrulandı`);
+  REMS.notify('EİDS Senkron', `${ok} portföy doğrulandı.`, 'eids');
+  REMS.Store.save();
+  REMS.toast(`Toplu doğrulama: ${ok}/${props.length}`);
   REMS.Router.render();
 };
 

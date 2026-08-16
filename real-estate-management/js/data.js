@@ -734,9 +734,26 @@ REMS.generateSeed = function () {
         emlakjet: { enabled: false, apiKey: '' },
         netgsm: { enabled: false, apiKey: '' },
         whatsapp: { enabled: false, apiKey: '' },
-        iyzico: { enabled: false, apiKey: '' }
+        iyzico: { enabled: false, apiKey: '' },
+        eids: { enabled: true, apiKey: '' }
+      },
+      eids: {
+        enabled: true,
+        firmaKod: 'EIDS-DEMO-8F3A2C1B',
+        vergiNo: '6120345678',
+        yetkiBelgeNo: 'TR-34-2024-001842',
+        returnUrl: 'https://emlakpro.local/eids/callback',
+        environment: 'Test',
+        ssoConnected: true,
+        lastSyncAt: '2026-08-16 14:22'
       }
     },
+    eidsVerifications: [],
+    eidsLogs: [
+      { id: 'el-1', at: '2026-08-16 14:22', action: 'Firma bağlantısı', detail: 'Test ortamı SSO doğrulandı', status: 'Başarılı' },
+      { id: 'el-2', at: '2026-08-15 11:08', action: 'Yetki sorgusu', detail: 'PRT-2026-001842 · Yetkili', status: 'Başarılı' },
+      { id: 'el-3', at: '2026-08-14 16:40', action: 'İlan doğrulama', detail: '3 portföy senkronize edildi', status: 'Başarılı' }
+    ],
     counters: {
       property: 1842,
       cash: 1060,
