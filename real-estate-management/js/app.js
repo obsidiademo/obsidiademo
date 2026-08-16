@@ -721,7 +721,7 @@ REMS.Pages.settings = function () {
         <a class="btn btn-sm btn-outline" href="login.html">Giriş Sayfası</a>
       </div>
       <div class="mt-16" style="display:flex;align-items:center;gap:10px">
-        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;background:transparent">
+        <img src="assets/images/obsidia-digital-logo.svg" alt="ObsidiaDigital" style="height:28px;background:transparent">
         <span class="text-muted" style="font-size:12px">ObsidiaDigital PropTech</span>
       </div>
     </div>
