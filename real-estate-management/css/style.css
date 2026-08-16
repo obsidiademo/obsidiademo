@@ -126,14 +126,14 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: center;
   gap: 0;
-  height: 34px;
+  height: 38px;
 }
 .brand-logo img,
 .brand-logo object,
 .site-logo {
-  height: 34px;
+  height: 36px;
   width: auto;
-  max-width: 210px;
+  max-width: 260px;
   display: block;
   object-fit: contain;
   background: transparent;

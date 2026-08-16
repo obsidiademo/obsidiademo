@@ -723,7 +723,7 @@ REMS.Pages.settings = function () {
         <a class="btn btn-sm btn-outline" href="login.html">Giriş Sayfası</a>
       </div>
       <div class="mt-16" style="display:flex;align-items:center;gap:10px">
-        <img src="assets/images/obsidia-digital-logo.svg" alt="ObsidiaDigital" style="height:28px;background:transparent">
+        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;background:transparent">
         <span class="text-muted" style="font-size:12px">ObsidiaDigital PropTech</span>
       </div>
     </div>
@@ -807,7 +807,12 @@ REMS.Pages.advisorMobile = function () {
   const agent = REMS.find.agent(u.id);
   return `
   <div class="field-home">
-    <div class="page-header"><div><h1>Danışman Paneli</h1><p>Merhaba ${u.name}</p></div></div>
+    <div class="page-header">
+      <div>
+        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;width:auto;max-width:200px;object-fit:contain;background:transparent;margin-bottom:10px;display:block">
+        <h1>Danışman Paneli</h1><p>Merhaba ${u.name}</p>
+      </div>
+    </div>
     <div class="quick-actions">
       <button class="quick-action" onclick="REMS.Router.go('quick-property')"><i data-lucide="camera"></i><strong>Hızlı Portföy</strong><span>Saha girişi</span></button>
       <button class="quick-action" onclick="REMS.Leads.openCreate()"><i data-lucide="user-plus"></i><strong>Lead Ekle</strong><span>Hızlı kayıt</span></button>
@@ -831,7 +836,10 @@ REMS.Pages.advisorMobile = function () {
 REMS.Pages.profile = function () {
   const u = REMS.Store.data.currentUser;
   return `
-  <div class="page-header"><div><h1>Profil</h1></div></div>
+  <div class="page-header"><div>
+    <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;width:auto;max-width:200px;object-fit:contain;background:transparent;margin-bottom:10px;display:block">
+    <h1>Profil</h1>
+  </div></div>
   <div class="card card-body" style="max-width:520px">
     <div class="flex-center gap-8 mb-16"><div class="avatar" style="width:64px;height:64px;font-size:18px">${u.avatar}</div>
     <div><strong style="font-size:18px">${u.name}</strong><div class="text-muted">${u.role}</div></div></div>

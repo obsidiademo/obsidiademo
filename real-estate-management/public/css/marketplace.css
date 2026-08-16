@@ -113,9 +113,9 @@ button, input, select { font: inherit; color: inherit; }
 }
 .logo img,
 .site-logo {
-  height: 36px;
+  height: 40px;
   width: auto;
-  max-width: 220px;
+  max-width: 260px;
   display: block;
   object-fit: contain;
   background: transparent;
