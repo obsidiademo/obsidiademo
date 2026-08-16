@@ -369,6 +369,36 @@ button, input, select { font: inherit; color: inherit; }
   display: flex; justify-content: space-between; align-items: center;
   gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); font-weight: 600;
 }
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.engineered-by {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.engineered-by strong {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.credit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 0;
+}
+.credit-icon svg { display: block; }
+.credit-icon.coffee svg { filter: drop-shadow(0 1px 1px rgba(139,94,60,.2)); }
+.credit-icon.love svg { filter: drop-shadow(0 1px 2px rgba(229,57,74,.25)); }
 
 .admin-chip {
   display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px;
