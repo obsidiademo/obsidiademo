@@ -13,6 +13,15 @@ python3 -m http.server 8080
 
 Tarayıcıda `index.html` açın.
 
+## VPS'e Dağıtım
+
+Üretim (nginx + Docker) dağıtımı için: [`deploy/README.md`](deploy/README.md)
+
+```bash
+cd deploy
+VPS_HOST=kullanici@SUNUCU_IP ./deploy.sh
+```
+
 ## Özellikler
 
 - Kolay360™ 3D araç deneyimi (Three.js)

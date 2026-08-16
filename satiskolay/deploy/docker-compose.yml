@@ -1,0 +1,14 @@
+# SatışKolay statik sitesini VPS üzerinde çalıştırmak için Docker Compose dosyası.
+# Kullanım (VPS içinde, bu klasörden):
+#   docker compose up -d --build
+# Farklı bir dış port için: HOST_PORT=8080 docker compose up -d --build
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: satiskolay-web:latest
+    container_name: satiskolay
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-80}:80"
