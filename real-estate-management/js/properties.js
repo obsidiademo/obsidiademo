@@ -181,9 +181,9 @@ REMS.Properties = {
     </div>
     <div class="detail-hero">
       <div>
-        <div class="gallery-main"><img id="galleryMain" src="${cover?.url || REMS.cover(p)}" alt=""></div>
+        <div class="gallery-main"><img id="galleryMain" src="${cover?.url || REMS.cover(p)}" alt="" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&h=600&q=80'"></div>
         <div class="gallery-thumbs">${photos.slice(0, 8).map((ph, i) =>
-          `<img class="${ph.isCover?'active':''}" src="${ph.url}" onclick="document.getElementById('galleryMain').src='${ph.url}'" alt="foto ${i}">`
+          `<img class="${ph.isCover?'active':''}" src="${ph.url}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&h=600&q=80'" onclick="document.getElementById('galleryMain').src='${ph.url}'" alt="foto ${i}">`
         ).join('')}</div>
       </div>
       <div class="card card-body">
