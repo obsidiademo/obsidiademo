@@ -2,7 +2,7 @@
 (function () {
   const THEME_KEY = 'emlakpro_vitrin_theme';
   const FAV_KEY = 'emlakpro_vitrin_favs';
-  const STORE_KEY = 'rems_proptech_v1';
+  const STORE_KEY = 'rems_proptech_v2';
 
   const themes = ['teal','ocean','forest','sunset','slate','rose','indigo','amber','mint','night'];
 

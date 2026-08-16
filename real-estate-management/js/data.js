@@ -28,7 +28,7 @@ function pickPhotos(n = 8, seed = 0) {
 }
 
 REMS.CONST = {
-  STORAGE_KEY: 'rems_proptech_v1',
+  STORAGE_KEY: 'rems_proptech_v2',
   ROLES: [
     'Süper Admin', 'Firma Sahibi', 'Şube Müdürü', 'Emlak Danışmanı',
     'Portföy Yöneticisi', 'Çağrı Merkezi', 'Muhasebe', 'Ofis Personeli', 'Mülk Sahibi'
@@ -373,6 +373,11 @@ REMS.generateSeed = function () {
   properties[0].ownerId = 'ow-1';
   properties[0].branchId = 'br-2';
   properties[0].authorityType = 'Tek Yetkili';
+  properties[0].transactionType = 'Satılık';
+  properties[0].propertyType = 'Daire';
+  properties[0].status = 'Aktif';
+  properties[0].currentPrice = 8350000;
+  properties[0].pricePerM2 = Math.round(8350000 / 145);
 
   const leads = [];
   for (let i = 0; i < 40; i++) {
