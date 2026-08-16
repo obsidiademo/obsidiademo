@@ -61,6 +61,7 @@ REMS.Properties = {
     <div class="page-header">
       <div><h1>Portföyler</h1><p>${props.length} kayıt · kart / liste / harita görünümü</p></div>
       <div class="page-actions">
+        <button class="btn btn-outline" onclick="REMS.Router.go('ai-analysis')"><i data-lucide="sparkles"></i> AI Analiz</button>
         <button class="btn btn-outline" onclick="REMS.Router.go('compare')"><i data-lucide="columns-2"></i> Karşılaştır</button>
         <button class="btn btn-outline" onclick="REMS.Router.go('map')"><i data-lucide="map"></i> Harita</button>
         <button class="btn btn-primary" onclick="REMS.Properties.openCreate()"><i data-lucide="plus"></i> Yeni Portföy</button>
@@ -172,6 +173,7 @@ REMS.Properties = {
         <p>${p.address.full} · ${agent?.name || ''} · ${branch?.name || ''}</p>
       </div>
       <div class="page-actions">
+        <button class="btn btn-outline" onclick="REMS.AI.openPropertyAnalysis('${p.id}')"><i data-lucide="sparkles"></i> AI Analiz</button>
         <button class="btn btn-outline" onclick="REMS.Properties.toggleFavorite('${p.id}')"><i data-lucide="heart"></i></button>
         <button class="btn btn-outline" onclick="REMS.Properties.addCompare('${p.id}')"><i data-lucide="columns-2"></i></button>
         <button class="btn btn-outline" onclick="REMS.Router.go('share',{id:'${p.id}'})"><i data-lucide="share-2"></i> Paylaş</button>
@@ -214,6 +216,7 @@ REMS.Properties = {
           }).join('')}
           <div class="mt-16"><span class="badge badge-warning">${p.daysOnMarket} gündür yayında · Risk: ${p.agingRisk}</span></div>
         </div>
+        ${REMS.AI.widgetHtml(p.id)}
       </div>
     </div>
 

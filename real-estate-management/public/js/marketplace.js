@@ -258,6 +258,41 @@
     }
   };
 
+  let typedTimer = null;
+  const HERO_LINES = [
+    "İstanbul'da satılık ve kiralık gayrimenkulleri keşfedin.",
+    'Kurumsal ofis portföyleri tek vitrinde.'
+  ];
+
+  function runTypewriter() {
+    const el = document.getElementById('heroTyped');
+    if (!el) return;
+    if (typedTimer) { clearTimeout(typedTimer); typedTimer = null; }
+
+    let lineIdx = 0;
+    let charIdx = 0;
+    let full = '';
+    el.textContent = '';
+
+    function tick() {
+      if (lineIdx >= HERO_LINES.length) return;
+      const line = HERO_LINES[lineIdx];
+      if (charIdx < line.length) {
+        full += line.charAt(charIdx);
+        charIdx += 1;
+        el.textContent = full;
+        typedTimer = setTimeout(tick, 28 + Math.random() * 22);
+      } else if (lineIdx < HERO_LINES.length - 1) {
+        full += ' ';
+        el.textContent = full;
+        lineIdx += 1;
+        charIdx = 0;
+        typedTimer = setTimeout(tick, 380);
+      }
+    }
+    typedTimer = setTimeout(tick, 320);
+  }
+
   function render() {
     data = loadData();
     const hash = (location.hash || '#home').slice(1);
@@ -272,6 +307,8 @@
     else if (route === 'favorites') app.innerHTML = favoritesPage();
     else if (route === 'projects') app.innerHTML = projectsPage();
     else app.innerHTML = listingsPage('home', 'Tüm İlanlar');
+
+    if (!route || route === 'home') runTypewriter();
   }
 
   document.querySelectorAll('.theme-dot').forEach(btn => {

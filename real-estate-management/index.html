@@ -27,6 +27,7 @@
           <div class="nav-group-title">Genel</div>
           <button class="nav-item active" data-route="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</button>
           <button class="nav-item" data-route="properties"><i data-lucide="building-2"></i> Portföyler</button>
+          <button class="nav-item" data-route="ai-analysis"><i data-lucide="sparkles"></i> AI Portföy Analizi</button>
           <button class="nav-item" data-route="map"><i data-lucide="map"></i> Harita</button>
           <button class="nav-item" data-route="calendar"><i data-lucide="calendar"></i> Takvim</button>
         </div>
@@ -178,6 +179,7 @@
   <script src="js/messages.js"></script>
   <script src="js/reports.js"></script>
   <script src="js/maps.js"></script>
+  <script src="js/ai.js"></script>
   <script>
     (function boot() {
       REMS.Store.load();
@@ -268,6 +270,9 @@
         d.agents.forEach(a => {
           if (!q || a.name.toLowerCase().includes(q)) results.push({ type: 'Danışman', title: a.name, sub: a.role, action: () => REMS.Router.go('agents') });
         });
+        if (!q || q.includes('ai') || q.includes('analiz') || q.includes('yapay')) {
+          results.unshift({ type: 'Modül', title: 'AI Portföy Analizi', sub: 'Fiyat · talep · yaşlanma', action: () => REMS.Router.go('ai-analysis') });
+        }
         const box = document.getElementById('cmdkResults');
         box.innerHTML = results.slice(0, 20).map((r, i) => `
           <button class="cmdk-item" data-i="${i}"><div><strong>${r.title}</strong><span>${r.type} · ${r.sub}</span></div></button>

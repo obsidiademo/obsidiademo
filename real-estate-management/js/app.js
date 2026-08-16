@@ -288,6 +288,7 @@ REMS.Router = {
       dashboard: () => REMS.Pages.dashboard(),
       properties: () => REMS.Properties.list(),
       'property-detail': () => REMS.Properties.detail(REMS.Router.params.id),
+      'ai-analysis': () => REMS.AI.page(),
       map: () => REMS.Maps.portfolioMap(),
       calendar: () => REMS.Appointments.calendar(),
       leads: () => REMS.Leads.pipeline(),
@@ -411,6 +412,7 @@ REMS.Pages.dashboard = function () {
       <p>Portföy, lead, randevu, teklif ve tahsilatların tek bakışta yönetimi</p>
     </div>
     <div class="page-actions">
+      <button class="btn btn-outline" onclick="REMS.Router.go('ai-analysis')"><i data-lucide="sparkles"></i> AI Analiz</button>
       <button class="btn btn-outline" onclick="REMS.Router.go('scenario')"><i data-lucide="play"></i> Senaryo Demo</button>
       <button class="btn btn-outline" onclick="REMS.Router.go('advisor')"><i data-lucide="smartphone"></i> Danışman Paneli</button>
       <button class="btn btn-primary" onclick="REMS.Properties.openCreate()"><i data-lucide="plus"></i> Yeni Portföy</button>

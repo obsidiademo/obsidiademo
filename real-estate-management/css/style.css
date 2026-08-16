@@ -1434,6 +1434,47 @@ textarea.form-control { min-height: 90px; resize: vertical; }
 }
 .toggle.on::after { transform: translateX(18px); }
 
+/* AI portfolio analysis */
+.ai-widget {
+  background: linear-gradient(145deg, var(--primary-soft), var(--surface));
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+}
+.ai-widget h3 { margin: 0; font-size: 14px; }
+.ai-narrative {
+  font-size: 13px;
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--text);
+  min-height: 3.2em;
+}
+.ai-list {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+.ai-list li {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.ai-list.actions li::marker { color: var(--primary); }
+.ai-score-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ai-loading .skeleton {
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--border-soft), var(--bg-soft), var(--border-soft));
+  background-size: 200% 100%;
+  animation: aiShimmer 1.2s ease infinite;
+}
+@keyframes aiShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
 .channel-row {
   display: flex;
   align-items: center;
