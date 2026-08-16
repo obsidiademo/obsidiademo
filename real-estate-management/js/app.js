@@ -135,24 +135,36 @@ REMS.matchProperties = function (request) {
   const results = [];
   props.forEach(p => {
     let score = 0;
-    let max = 0;
-    const add = (cond, w) => { max += w; if (cond) score += w; };
-
-    add(p.transactionType === request.transactionType, 25);
-    add(!request.propertyType || p.propertyType === request.propertyType, 15);
-    const loc = `${p.address.ilce} ${p.address.mahalle}`.toLowerCase();
-    const distOk = (request.districts || []).some(d => loc.includes(String(d).toLowerCase()));
-    add(distOk, 20);
-    const rooms = p.housing?.rooms;
-    const roomOk = !request.rooms?.length || request.rooms.includes(rooms) ||
-      (request.rooms || []).some(r => rooms && rooms.includes(r.replace('+', '')));
-    add(roomOk, 15);
+    // İşlem tipi
+    if (p.transactionType === request.transactionType) score += 25;
+    else score += 5;
+    // Tür
+    if (!request.propertyType || p.propertyType === request.propertyType) score += 15;
+    else if (['Daire', 'Rezidans'].includes(p.propertyType) && ['Daire', 'Rezidans'].includes(request.propertyType)) score += 10;
+    // Bölge
+    const loc = `${p.address.ilce} ${p.address.mahalle}`.toLocaleLowerCase('tr-TR');
+    const distOk = (request.districts || []).some(d => {
+      const dd = String(d).toLocaleLowerCase('tr-TR');
+      return loc.includes(dd) || dd.includes(p.address.ilce.toLocaleLowerCase('tr-TR'));
+    });
+    if (distOk) score += 20;
+    // Oda
+    const rooms = p.housing?.rooms || '';
+    const roomOk = !(request.rooms || []).length || (request.rooms || []).some(r => {
+      const rr = String(r).trim();
+      return rooms === rr || rooms.startsWith(rr.split('+')[0] + '+');
+    });
+    if (roomOk) score += 15;
+    // Bütçe
     const price = p.currentPrice;
-    add(price >= (request.budgetMin || 0) && price <= (request.budgetMax || Infinity), 15);
+    if (price >= (request.budgetMin || 0) && price <= (request.budgetMax || Infinity)) score += 15;
+    else if (price >= (request.budgetMin || 0) * 0.9 && price <= (request.budgetMax || Infinity) * 1.1) score += 8;
+    // m²
     const m2 = p.housing?.brutM2 || p.land?.m2 || 0;
-    add(m2 >= (request.minM2 || 0) && m2 <= (request.maxM2 || Infinity), 10);
+    if (m2 >= (request.minM2 || 0) && m2 <= (request.maxM2 || Infinity)) score += 10;
+    else if (m2 >= (request.minM2 || 0) * 0.85) score += 5;
 
-    const pct = max ? Math.round((score / max) * 100) : 0;
+    const pct = Math.min(100, Math.round(score));
     if (pct >= 55) results.push({ property: p, score: pct });
   });
   return results.sort((a, b) => b.score - a.score);
