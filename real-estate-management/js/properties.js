@@ -100,7 +100,7 @@ REMS.Properties = {
       const agent = REMS.find.agent(p.agentId);
       return `<div class="prop-card" onclick="REMS.Router.go('property-detail',{id:'${p.id}'})">
         <div class="prop-card-img">
-          <img src="${REMS.cover(p)}" alt="${p.title}" loading="lazy">
+          <img src="${REMS.cover(p)}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&h=600&q=80'">
           <div class="prop-card-badges">
             <span class="badge badge-primary">${p.transactionType}</span>
             ${REMS.UI.statusBadge(p.status)}

@@ -2,7 +2,7 @@
 (function () {
   const THEME_KEY = 'emlakpro_vitrin_theme';
   const FAV_KEY = 'emlakpro_vitrin_favs';
-  const STORE_KEY = 'rems_proptech_v2';
+  const STORE_KEY = 'rems_proptech_v3';
 
   const themes = ['teal','ocean','forest','sunset','slate','rose','indigo','amber','mint','night'];
 
@@ -28,7 +28,10 @@
   function agent(id) { return data.agents.find(a => a.id === id); }
   function getFavs() { try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch { return []; } }
   function setFavs(arr) { localStorage.setItem(FAV_KEY, JSON.stringify(arr)); updateFavCount(); }
-  function updateFavCount() { const el = document.getElementById('favCount'); if (el) el.textContent = getFavs().length; }
+  function updateFavCount() {
+    const btn = document.getElementById('favBtn');
+    if (btn) btn.textContent = `Favoriler (${getFavs().length})`;
+  }
 
   function applyTheme(name) {
     if (!themes.includes(name)) name = 'teal';
@@ -63,7 +66,7 @@
 
   function card(p) {
     return `<article class="listing-card" onclick="Market.go('listing/${p.id}')">
-      <img src="${cover(p)}" alt="${p.title}" loading="lazy">
+      <img src="${cover(p)}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&h=600&q=80'">
       <div class="listing-body">
         <div class="price">${money(p.currentPrice)}</div>
         <div class="title">${p.title}</div>
@@ -102,14 +105,16 @@
     const list = filtered(mode === 'home' ? '' : mode);
     return `
     ${mode === 'home' ? `<section class="hero"><div class="hero-inner">
-      <h1>EmlakPro</h1>
-      <p>İstanbul'da satılık ve kiralık gayrimenkulleri keşfedin. Kurumsal ofis portföyleri tek vitrinde.</p>
+      <div class="hero-copy">
+        <h1>EmlakPro</h1>
+        <p>İstanbul'da satılık ve kiralık gayrimenkulleri keşfedin. Kurumsal ofis portföyleri tek vitrinde.</p>
+      </div>
       <div class="search-panel">
-        <select id="heroTx"><option value="">Satılık / Kiralık</option><option>Satılık</option><option>Kiralık</option></select>
-        <select id="heroDist"><option value="">İlçe</option>${[...new Set(data.properties.map(p=>p.address.ilce))].map(d=>`<option>${d}</option>`).join('')}</select>
-        <select id="heroType"><option value="">Konut tipi</option>${['Daire','Villa','Rezidans','Dükkan','Arsa'].map(t=>`<option>${t}</option>`).join('')}</select>
-        <input id="heroQ" placeholder="Mahalle veya anahtar kelime">
-        <button class="btn btn-primary" onclick="Market.heroSearch()">Ara</button>
+        <select id="heroTx" aria-label="İşlem tipi"><option value="">Satılık / Kiralık</option><option>Satılık</option><option>Kiralık</option></select>
+        <select id="heroDist" aria-label="İlçe"><option value="">İlçe</option>${[...new Set(data.properties.map(p=>p.address.ilce))].map(d=>`<option>${d}</option>`).join('')}</select>
+        <select id="heroType" aria-label="Konut tipi"><option value="">Konut tipi</option>${['Daire','Villa','Rezidans','Dükkan','Arsa'].map(t=>`<option>${t}</option>`).join('')}</select>
+        <input id="heroQ" placeholder="Mahalle veya anahtar kelime" aria-label="Arama">
+        <button class="btn btn-primary" type="button" onclick="Market.heroSearch()">Ara</button>
       </div>
     </div></section>` : ''}
     <div class="layout">

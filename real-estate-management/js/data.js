@@ -11,7 +11,7 @@ const PROPERTY_PHOTOS = [
   '1512917774080-9991f1c4c750', '1522708323590-d24dbb6b0267', '1560448204-e02f11c3d0e2',
   '1570129477492-45c003edd2be', '1605276374104-ded2bb5b5e8a', '1600210492486-724fe5c67fb0',
   '1613490493576-7fde63acd811', '1605146768851-eda79da39897', '1580587771525-78b9dba3b914',
-  '1600047509358-9dc4651000f0', '1600573472550-8090b5e0745e'
+  '1600573472550-8090b5e0745e', '1568605114967-8130f3a36994'
 ];
 
 function pickPhotos(n = 8, seed = 0) {
@@ -28,7 +28,7 @@ function pickPhotos(n = 8, seed = 0) {
 }
 
 REMS.CONST = {
-  STORAGE_KEY: 'rems_proptech_v2',
+  STORAGE_KEY: 'rems_proptech_v3',
   ROLES: [
     'Süper Admin', 'Firma Sahibi', 'Şube Müdürü', 'Emlak Danışmanı',
     'Portföy Yöneticisi', 'Çağrı Merkezi', 'Muhasebe', 'Ofis Personeli', 'Mülk Sahibi'

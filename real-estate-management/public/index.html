@@ -15,7 +15,10 @@
     <div class="topbar-inner">
       <a class="logo" href="#home">
         <div class="logo-mark">EP</div>
-        <div>EmlakPro<span style="font-weight:500;color:var(--muted);font-size:12px;display:block;line-height:1">Vitrin</span></div>
+        <div class="logo-text">
+          <strong>EmlakPro</strong>
+          <small>Vitrin</small>
+        </div>
       </a>
       <nav class="nav-links">
         <a href="#home" class="active" data-nav="home">Ana Sayfa</a>
@@ -26,12 +29,12 @@
       </nav>
       <div class="top-actions">
         <a class="admin-chip" href="../index.html">← Admin Panele Dön</a>
-        <button class="btn btn-outline" id="favBtn">Favoriler (<span id="favCount">0</span>)</button>
-        <button class="btn btn-primary" onclick="location.hash='sale'">İlan Ara</button>
+        <button class="btn btn-outline" id="favBtn" type="button">Favoriler (0)</button>
+        <button class="btn btn-primary" type="button" onclick="location.hash='sale'">İlan Ara</button>
       </div>
     </div>
-    <div class="theme-bar">
-      <span>Tema seç:</span>
+    <div class="theme-bar" aria-label="Tema seçici">
+      <span>Tema</span>
       <button class="theme-dot active" data-t="teal" title="Teal"></button>
       <button class="theme-dot" data-t="ocean" title="Ocean"></button>
       <button class="theme-dot" data-t="forest" title="Forest"></button>
