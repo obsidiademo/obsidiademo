@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ön Kayıt | Güneş Bahçesi Anaokulu</title>
+  <link rel="icon" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo-icon.png" alt="">
+        <span class="logo-text">Güneş Bahçesi<span>Anaokulu</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Ana menü">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="programlar.html">Programlar</a>
+        <a href="ogretmenler.html">Öğretmenler</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
+        <a class="btn btn-sun" href="kayit.html">Ön Kayıt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section class="page-hero wrap">
+      <p class="kicker">2026–2027</p>
+      <h1>Ön kayıt formu</h1>
+      <p class="lead" style="margin-inline:auto">Formu gönderdikten sonra sizi arayıp okul turu için gün öneririz. Bu sayfa demodur, veri saklanmaz.</p>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="max-width:760px">
+        <form class="form" data-form>
+          <div class="form-grid">
+            <div>
+              <label for="veli">Veli adı soyadı</label>
+              <input id="veli" name="veli" required>
+            </div>
+            <div>
+              <label for="telefon">Telefon</label>
+              <input id="telefon" name="telefon" type="tel" required>
+            </div>
+            <div class="full">
+              <label for="mail">E-posta</label>
+              <input id="mail" name="mail" type="email" required>
+            </div>
+            <div>
+              <label for="cocuk">Çocuğun adı</label>
+              <input id="cocuk" name="cocuk" required>
+            </div>
+            <div>
+              <label for="dogum">Doğum tarihi</label>
+              <input id="dogum" name="dogum" type="date" required>
+            </div>
+            <div>
+              <label for="sinif">İstenen sınıf</label>
+              <select id="sinif" name="sinif">
+                <option>Minikler (24–36 ay)</option>
+                <option>Keşif (3–4 yaş)</option>
+                <option>Yıldızlar (4–5 yaş)</option>
+                <option>Hazırlık (5–6 yaş)</option>
+              </select>
+            </div>
+            <div>
+              <label for="sure">Program</label>
+              <select id="sure" name="sure">
+                <option>Tam gün (08:00–18:00)</option>
+                <option>Yarı zamanlı (08:30–13:00)</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="not">Eklemek istediğiniz not</label>
+              <textarea id="not" name="not" placeholder="Alerji, kardeş, servis ihtiyacı..."></textarea>
+            </div>
+          </div>
+          <p style="margin-top:18px"><button class="btn btn-coral" type="submit">Ön kaydı gönder</button></p>
+          <p class="notice">Ön kaydınız alındı gibi görünsün diye bu mesaj çıktı. Demo olduğu için kayıt oluşmadı.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="images/logo-icon.png" alt="">
+          <strong>Güneş Bahçesi Anaokulu</strong>
+        </div>
+        <p>Caferağa Mah. Moda Cad. No: 24<br>Kadıköy / İstanbul</p>
+        <p>0216 555 12 34<br>merhaba@gunesbahcesi.demo</p>
+      </div>
+      <div>
+        <h3>Sayfalar</h3>
+        <ul>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="programlar.html">Programlar</a></li>
+          <li><a href="ogretmenler.html">Öğretmenler</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Saatler</h3>
+        <ul>
+          <li>Pazartesi–Cuma 08:00–18:00</li>
+          <li>Yarı zamanlı 08:30–13:00</li>
+          <li>Cumartesi tanıtım 10:00–12:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap copy">Demo HTML sitesi · Gerçek bir kayıt alınmaz · Güneş Bahçesi 2026</div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

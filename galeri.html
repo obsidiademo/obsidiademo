@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galeri | Güneş Bahçesi Anaokulu</title>
+  <link rel="icon" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo-icon.png" alt="">
+        <span class="logo-text">Güneş Bahçesi<span>Anaokulu</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Ana menü">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="programlar.html">Programlar</a>
+        <a href="ogretmenler.html">Öğretmenler</a>
+        <a class="active" href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
+        <a class="btn btn-sun" href="kayit.html">Ön Kayıt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section class="page-hero wrap">
+      <p class="kicker">Galeri</p>
+      <h1>Bir günün kareleri</h1>
+      <p class="lead" style="margin-inline:auto">Fotoğraflar demo amaçlıdır. Gerçek okulda çocuk yüzleri veli izni olmadan paylaşılmaz.</p>
+    </section>
+
+    <section class="section" style="padding-top:8px">
+      <div class="wrap">
+        <div class="filters">
+          <button type="button" class="active" data-filter="hepsi">Hepsi</button>
+          <button type="button" data-filter="sinif">Sınıf</button>
+          <button type="button" data-filter="bahce">Bahçe</button>
+          <button type="button" data-filter="atoly">Atölye</button>
+        </div>
+        <div class="gallery">
+          <a href="images/hero-sinif.jpg" data-lightbox data-cat="sinif"><img src="images/hero-sinif.jpg" alt="Sınıfta oyun"></a>
+          <a href="images/galeri-bahce.jpg" data-lightbox data-cat="bahce"><img src="images/galeri-bahce.jpg" alt="Bahçe ve oyun alanı"></a>
+          <a href="images/galeri-sanat.jpg" data-lightbox data-cat="atoly"><img src="images/galeri-sanat.jpg" alt="Sanat masası"></a>
+          <a href="images/galeri-muzik.jpg" data-lightbox data-cat="atoly"><img src="images/galeri-muzik.jpg" alt="Müzik çemberi"></a>
+          <a href="images/galeri-okuma.jpg" data-lightbox data-cat="sinif"><img src="images/galeri-okuma.jpg" alt="Okuma köşesi"></a>
+          <a href="images/galeri-yemek.jpg" data-lightbox data-cat="sinif"><img src="images/galeri-yemek.jpg" alt="Yemek saati"></a>
+          <a href="images/program-doga.jpg" data-lightbox data-cat="bahce"><img src="images/program-doga.jpg" alt="Fide dikimi"></a>
+          <a href="images/galeri-uyku.jpg" data-lightbox data-cat="sinif"><img src="images/galeri-uyku.jpg" alt="Dinlenme odası"></a>
+          <a href="images/program-oyun.jpg" data-lightbox data-cat="sinif"><img src="images/program-oyun.jpg" alt="Bloklarla oyun"></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-label="Büyük fotoğraf">
+    <img src="" alt="">
+  </div>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="images/logo-icon.png" alt="">
+          <strong>Güneş Bahçesi Anaokulu</strong>
+        </div>
+        <p>Caferağa Mah. Moda Cad. No: 24<br>Kadıköy / İstanbul</p>
+        <p>0216 555 12 34<br>merhaba@gunesbahcesi.demo</p>
+      </div>
+      <div>
+        <h3>Sayfalar</h3>
+        <ul>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="programlar.html">Programlar</a></li>
+          <li><a href="ogretmenler.html">Öğretmenler</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Saatler</h3>
+        <ul>
+          <li>Pazartesi–Cuma 08:00–18:00</li>
+          <li>Yarı zamanlı 08:30–13:00</li>
+          <li>Cumartesi tanıtım 10:00–12:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap copy">Demo HTML sitesi · Gerçek bir kayıt alınmaz · Güneş Bahçesi 2026</div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
