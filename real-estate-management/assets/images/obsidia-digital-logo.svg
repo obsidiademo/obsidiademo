@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 100" fill="none" role="img" aria-label="ObsidiaDigital">
-  <!-- Three overlapping right-pointing triangles (play marks) -->
-  <g transform="translate(4,12)">
-    <polygon points="0,4 0,72 62,38" fill="#E5394A"/>
-    <polygon points="22,4 22,72 84,38" fill="#00C2C7"/>
-    <polygon points="44,4 44,72 106,38" fill="#F5C518"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 110" role="img" aria-label="ObsidiaDigital">
+  <g transform="translate(6,12)">
+    <polygon points="58,4 58,86 128,45" fill="#F5C518"/>
+    <polygon points="32,4 32,86 102,45" fill="#00C2C7"/>
+    <polygon points="6,4 6,86 76,45" fill="#E5394A"/>
   </g>
-  <text x="132" y="62" font-family="Quicksand, 'Segoe UI', Arial, sans-serif" font-size="38" font-weight="700" fill="currentColor" letter-spacing="-0.4">ObsidiaDigital</text>
+  <text x="148" y="70" font-family="Quicksand, Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#111111" letter-spacing="-0.5">ObsidiaDigital</text>
 </svg>
