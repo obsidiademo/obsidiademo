@@ -1,0 +1,42 @@
+---
+description: Deploy static demos to the Hostinger VPS when the user asks
+alwaysApply: true
+---
+
+# Hostinger VPS demo deploy
+
+When the user says to add/publish/deploy a project to the VPS ("VPSe ekle", "sunucuya at", "yayınla"), deploy a static build as a subdirectory on the existing demo hub.
+
+## Credentials
+
+Use Cloud Agent secrets already injected as environment variables. Never print, log, or commit them.
+
+- `VPS_HOST` (required)
+- `VPS_USER` (default `root`)
+- `VPS_PORT` (default `22`)
+- `VPS_SSH_PASSWORD` (password auth; alias `VPS_PASSWORD`)
+- `VPS_SSH_PRIVATE_KEY` (optional; prefer if set)
+- `VPS_DEPLOY_ROOT` (default `/var/www/demos`)
+
+## Target
+
+Nginx serves `/var/www/demos` at `http://$VPS_HOST/`. Each project is:
+
+`/var/www/demos/<slug>/` → `http://$VPS_HOST/<slug>/`
+
+Existing demos include `anaokulu` and `satiskolay`. The hub listing is `/var/www/demos/index.html`.
+
+## How to deploy
+
+Run `scripts/vps-deploy.sh` (also installed as `vps-deploy` after environment setup):
+
+```bash
+scripts/vps-deploy.sh --source ./dist --slug my-demo --title "Demo Title" --description "Kısa açıklama"
+```
+
+- Pick a URL-safe lowercase slug (`[a-z0-9-]`).
+- Deploy the built static files, not `.git` or `.env`.
+- Let the script update the hub `index.html` unless the user asks not to.
+- After deploy, fetch `http://$VPS_HOST/<slug>/` and confirm the page loads.
+
+Do not use root credentials from chat, README, or committed files.
