@@ -234,6 +234,23 @@ ul, ol { list-style: none; }
   font-size: 12px;
 }
 
+.sidebar-credit {
+  margin: 8px 8px 4px;
+  padding: 12px 10px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.sidebar-credit strong { color: var(--primary-dark); font-weight: 700; }
+.sidebar-credit .credit-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  line-height: 0;
+  margin: 0 2px;
+}
+
 /* Main */
 .main {
   margin-left: var(--sidebar-w);
