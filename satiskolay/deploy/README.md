@@ -6,10 +6,37 @@ Bu klasör, SatışKolay statik sitesini bir VPS üzerinde üretim ortamında ya
 
 | Dosya | Açıklama |
 | --- | --- |
-| `Dockerfile` | nginx tabanlı üretim imajı |
+| `deploy-hub.sh` | Mevcut sunucuya (nginx "demo hub") alt klasör olarak yayınlar — **bu sunucu için önerilen** |
+| `Dockerfile` | nginx tabanlı üretim imajı (bağımsız/standalone VPS için) |
 | `nginx.conf` | gzip, önbellek ve güvenlik başlıkları içeren nginx yapılandırması |
-| `docker-compose.yml` | Tek komutla çalıştırma |
-| `deploy.sh` | Yerelden uzak VPS'e otomatik dağıtım (rsync + SSH) |
+| `docker-compose.yml` | Docker ile tek komutla çalıştırma |
+| `deploy.sh` | Bağımsız VPS'e Docker ile otomatik dağıtım (rsync + SSH) |
+
+## Bu sunucu nasıl çalışıyor?
+
+Hedef VPS bir **nginx "demo hub"** sunucusudur (Docker yok): nginx `root /var/www/demos`
+klasörünü sunar ve her alt klasör `http://SUNUCU/<slug>/` adresinden yayınlanır. SatışKolay
+bu nedenle `http://SUNUCU/satiskolay/` altında yayındadır. Güncellemek için aşağıdaki
+`deploy-hub.sh` yeterlidir; nginx yapılandırmasına dokunmak gerekmez.
+
+## Yöntem 0 — Demo hub'a yayınla/güncelle (bu sunucu için)
+
+SSH anahtarı ile:
+
+```bash
+cd satiskolay/deploy
+VPS_HOST=SUNUCU VPS_USER=root ./deploy-hub.sh
+```
+
+Parola ile (yerelde `sshpass` gerekir):
+
+```bash
+cd satiskolay/deploy
+VPS_HOST=SUNUCU VPS_USER=root VPS_SSH_PASSWORD='***' ./deploy-hub.sh
+```
+
+Betik yalnızca `index.html` ve `assets/` klasörünü `/var/www/demos/satiskolay/` altına
+`rsync` ile senkronlar ve `http://localhost/satiskolay/` üzerinden HTTP 200 doğrulaması yapar.
 
 ## Yöntem 1 — Yerelden otomatik dağıtım (önerilen)
 
