@@ -107,7 +107,7 @@
     ${mode === 'home' ? `<section class="hero"><div class="hero-inner">
       <div class="hero-copy">
         <h1>EmlakPro Vitrin</h1>
-        <p>İstanbul'da satılık ve kiralık gayrimenkulleri keşfedin. Kurumsal ofis portföyleri tek vitrinde.</p>
+        <p><span class="typed" id="heroTyped" aria-live="polite"></span><span class="typed-cursor" aria-hidden="true"></span></p>
       </div>
       <div class="search-panel">
         <select id="heroTx" aria-label="İşlem tipi"><option value="">Satılık / Kiralık</option><option>Satılık</option><option>Kiralık</option></select>
