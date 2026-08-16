@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>EmlakPro — Gayrimenkul Yönetim Platformu</title>
+  <title>ObsidiaDigital EmlakPro — Gayrimenkul Yönetim Platformu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,16 +17,17 @@
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-brand">
-        <div class="brand-mark">EP</div>
-        <div class="brand-text">
-          <strong>EmlakPro</strong>
-          <span>PropTech SaaS</span>
-        </div>
+        <a class="brand-logo" href="#dashboard" title="ObsidiaDigital">
+          <img class="logo-light" src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital">
+          <img class="logo-dark" src="assets/images/obsidia-digital-logo-white.png" alt="ObsidiaDigital">
+        </a>
       </div>
       <div class="demo-link">
+        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;width:auto;margin-bottom:8px;background:transparent">
         <strong>Son Kullanıcı Vitrini</strong>
         <span>Sahibinden tarzı ilan sitesi · 10 tema</span>
         <a href="public/index.html" target="_blank" rel="noopener">Demoya Git →</a>
+        <a href="login.html" style="margin-top:2px">Emlakçı Girişi →</a>
       </div>
       <nav class="sidebar-nav">
         <div class="nav-group">
@@ -127,6 +128,8 @@
             <button onclick="REMS.Router.go('settings')">Hesabım</button>
             <button onclick="REMS.Router.go('notifications')">Bildirim Ayarları</button>
             <button onclick="REMS.Pages.toggleTheme()">Tema Değiştir</button>
+            <button onclick="location.href='login.html'">Emlakçı Girişi</button>
+            <button onclick="location.href='public/index.html'">Vitrine Git</button>
             <button onclick="REMS.toast('Oturum demo modunda')">Çıkış</button>
           </div>
         </div>

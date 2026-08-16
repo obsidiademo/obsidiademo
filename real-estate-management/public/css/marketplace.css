@@ -111,6 +111,15 @@ button, input, select { font: inherit; color: inherit; }
   line-height: 1.15;
   white-space: nowrap;
 }
+.logo img,
+.site-logo {
+  height: 36px;
+  width: auto;
+  max-width: 220px;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
 .logo-text { display: flex; flex-direction: column; gap: 1px; }
 .logo-text strong { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
 .logo-text small {
@@ -126,6 +135,10 @@ button, input, select { font: inherit; color: inherit; }
   display: grid; place-items: center; font-size: 13px; font-weight: 700;
   flex-shrink: 0;
 }
+[data-theme="night"] .logo .logo-light { display: none; }
+[data-theme="night"] .logo .logo-dark { display: block; }
+.logo .logo-dark { display: none; }
+.logo .logo-light { display: block; }
 .nav-links {
   display: flex;
   gap: 4px;

@@ -106,7 +106,8 @@
     return `
     ${mode === 'home' ? `<section class="hero"><div class="hero-inner">
       <div class="hero-copy">
-        <h1>EmlakPro</h1>
+        <img src="../assets/images/obsidia-digital-logo-white.png" alt="ObsidiaDigital" style="height:44px;width:auto;margin:0 auto 16px;display:block;background:transparent">
+        <h1>EmlakPro Vitrin</h1>
         <p>İstanbul'da satılık ve kiralık gayrimenkulleri keşfedin. Kurumsal ofis portföyleri tek vitrinde.</p>
       </div>
       <div class="search-panel">

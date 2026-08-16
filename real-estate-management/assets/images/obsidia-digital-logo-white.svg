@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 100" fill="none" role="img" aria-label="ObsidiaDigital">
+  <g transform="translate(4,12)">
+    <polygon points="0,4 0,72 62,38" fill="#E5394A"/>
+    <polygon points="22,4 22,72 84,38" fill="#00C2C7"/>
+    <polygon points="44,4 44,72 106,38" fill="#F5C518"/>
+  </g>
+  <text x="132" y="62" font-family="Quicksand, 'Segoe UI', Arial, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" letter-spacing="-0.4">ObsidiaDigital</text>
+</svg>

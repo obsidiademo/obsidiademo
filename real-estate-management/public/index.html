@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EmlakPro Vitrin — Satılık & Kiralık Gayrimenkul</title>
+  <title>ObsidiaDigital EmlakPro Vitrin — Satılık & Kiralık</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,12 +13,9 @@
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="logo" href="#home">
-        <div class="logo-mark">EP</div>
-        <div class="logo-text">
-          <strong>EmlakPro</strong>
-          <small>Vitrin</small>
-        </div>
+      <a class="logo" href="#home" title="ObsidiaDigital">
+        <img class="logo-light" src="../assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital">
+        <img class="logo-dark" src="../assets/images/obsidia-digital-logo-white.png" alt="ObsidiaDigital">
       </a>
       <nav class="nav-links">
         <a href="#home" class="active" data-nav="home">Ana Sayfa</a>
@@ -28,7 +25,8 @@
         <a href="#agents" data-nav="agents">Danışmanlar</a>
       </nav>
       <div class="top-actions">
-        <a class="admin-chip" href="../index.html">← Admin Panele Dön</a>
+        <a class="admin-chip" href="../login.html">Emlakçı Girişi</a>
+        <a class="admin-chip" href="../index.html">← Admin Panel</a>
         <button class="btn btn-outline" id="favBtn" type="button">Favoriler (0)</button>
         <button class="btn btn-primary" type="button" onclick="location.hash='sale'">İlan Ara</button>
       </div>
@@ -52,12 +50,16 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div>
-        <strong style="color:var(--text)">EmlakPro Gayrimenkul</strong>
-        <div>Kurumsal web ilan vitrini · Admin panelle entegre demo</div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <img class="site-logo" src="../assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:32px">
+        <div>
+          <strong style="color:var(--text)">ObsidiaDigital · EmlakPro</strong>
+          <div>Kurumsal web ilan vitrini · Admin panelle entegre demo</div>
+        </div>
       </div>
-      <div>
-        <a href="../index.html" class="btn btn-outline">Yönetim Paneline Git</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="../login.html" class="btn btn-outline">Emlakçı Girişi</a>
+        <a href="../index.html" class="btn btn-outline">Yönetim Paneli</a>
       </div>
     </div>
   </footer>

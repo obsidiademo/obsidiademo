@@ -717,7 +717,13 @@ REMS.Pages.settings = function () {
       <div class="stat-row"><span>Son Kullanıcı Vitrini</span>
         <a class="btn btn-sm btn-primary" href="public/index.html" target="_blank">Demoya Git</a>
       </div>
-      <p class="text-muted mt-16" style="font-size:12px">Mimari not: Danışman saha konumu yalnızca çalışma saatlerinde veya kullanıcı paylaşımı açıkken görünür.</p>
+      <div class="stat-row"><span>Emlakçı Girişi</span>
+        <a class="btn btn-sm btn-outline" href="login.html">Giriş Sayfası</a>
+      </div>
+      <div class="mt-16" style="display:flex;align-items:center;gap:10px">
+        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital" style="height:28px;background:transparent">
+        <span class="text-muted" style="font-size:12px">ObsidiaDigital PropTech</span>
+      </div>
     </div>
   </div>`;
 };
