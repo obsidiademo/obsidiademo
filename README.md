@@ -14,7 +14,14 @@ Kadıköy temalı, statik bir anaokulu sitesi. Sunucu gerekmez.
 
 Formlar tarayıcıda kalır; veri gönderilmez.
 
-## Nasıl açılır
+## Canlı demo
+
+VPS üzerinde nginx ile yayınlandı:
+
+- http://srv1894749.hstgr.cloud/anaokulu/
+- Demo hub: http://srv1894749.hstgr.cloud/
+
+## Yerelde nasıl açılır
 
 `index.html` dosyasını tarayıcıda açın veya klasörde:
 
