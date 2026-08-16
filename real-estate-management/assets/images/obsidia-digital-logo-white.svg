@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 152" role="img" aria-label="ObsidiaDigital">
+  <g transform="translate(8,18)">
+    <path d="M6 8 C6 3 10 1 14 3 L108 52 C112 54 112 60 108 62 L14 111 C10 113 6 111 6 106 Z" fill="#F82D3E"/>
+    <path d="M46 8 C46 3 50 1 54 3 L148 52 C152 54 152 60 148 62 L54 111 C50 113 46 111 46 106 Z" fill="#02C4C7"/>
+    <path d="M86 8 C86 3 90 1 94 3 L188 52 C192 54 192 60 188 62 L94 111 C90 113 86 111 86 106 Z" fill="#F9BC0A"/>
+  </g>
+  <text x="220" y="96" font-family="Quicksand, Montserrat, Arial, sans-serif" font-size="64" font-weight="700" fill="#FFFFFF" letter-spacing="-1.2">ObsidiaDigital</text>
+</svg>

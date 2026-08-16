@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="teal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ObsidiaDigital EmlakPro Vitrin — Satılık & Kiralık</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/marketplace.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="#home" title="ObsidiaDigital">
+        <img class="logo-light" src="../assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital">
+        <img class="logo-dark" src="../assets/images/obsidia-digital-logo-white.png" alt="ObsidiaDigital">
+      </a>
+      <nav class="nav-links">
+        <a href="#home" class="active" data-nav="home">Ana Sayfa</a>
+        <a href="#sale" data-nav="sale">Satılık</a>
+        <a href="#rent" data-nav="rent">Kiralık</a>
+        <a href="#projects" data-nav="projects">Projeler</a>
+        <a href="#agents" data-nav="agents">Danışmanlar</a>
+      </nav>
+      <div class="top-actions">
+        <a class="admin-chip" href="../login.html">Emlakçı Girişi</a>
+        <a class="admin-chip" href="../index.html">← Admin Panel</a>
+        <button class="btn btn-outline" id="favBtn" type="button">Favoriler (0)</button>
+        <button class="btn btn-primary" type="button" onclick="location.hash='sale'">İlan Ara</button>
+      </div>
+    </div>
+    <div class="theme-bar" aria-label="Tema seçici">
+      <span>Tema</span>
+      <button class="theme-dot active" data-t="teal" title="Teal"></button>
+      <button class="theme-dot" data-t="ocean" title="Ocean"></button>
+      <button class="theme-dot" data-t="forest" title="Forest"></button>
+      <button class="theme-dot" data-t="sunset" title="Sunset"></button>
+      <button class="theme-dot" data-t="slate" title="Slate"></button>
+      <button class="theme-dot" data-t="rose" title="Rose"></button>
+      <button class="theme-dot" data-t="indigo" title="Indigo"></button>
+      <button class="theme-dot" data-t="amber" title="Amber"></button>
+      <button class="theme-dot" data-t="mint" title="Mint"></button>
+      <button class="theme-dot" data-t="night" title="Night"></button>
+    </div>
+  </header>
+
+  <div id="app"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="engineered-by">
+        Engineered By <strong>Obsidia Digital</strong>
+        · Made With
+        <span class="credit-icon coffee" title="Coffee" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z" fill="#C4A484"/>
+            <path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M5 19h10" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M8 4c0 1-.5 1.5-.5 2.5S8 8 8 8" stroke="#5B9BD5" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M11 3.5c0 1-.5 1.5-.5 2.5S11 7.5 11 7.5" stroke="#5B9BD5" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        and
+        <span class="credit-icon love" title="Love" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21s-6.5-4.35-9.2-8.1C.8 10.2 1.4 6.8 4.2 5.4c1.8-.9 4-.4 5.3 1.2L12 9l2.5-2.4c1.3-1.6 3.5-2.1 5.3-1.2 2.8 1.4 3.4 4.8 1.4 7.5C18.5 16.65 12 21 12 21z" fill="#E5394A"/>
+          </svg>
+        </span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="../login.html" class="btn btn-outline">Emlakçı Girişi</a>
+        <a href="../index.html" class="btn btn-outline">Yönetim Paneli</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="js/marketplace.js"></script>
+</body>
+</html>

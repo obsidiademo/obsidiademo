@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emlakçı Girişi — ObsidiaDigital EmlakPro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Quicksand', sans-serif !important; }
+    html, body, button, input, label, a, span, div, p, h1, h2, h3 {
+      font-family: 'Quicksand', sans-serif !important;
+    }
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(0,194,199,0.18), transparent 45%),
+        radial-gradient(ellipse at 80% 90%, rgba(229,57,74,0.12), transparent 40%),
+        linear-gradient(160deg, #f7fafc 0%, #eef4f7 100%);
+      color: #0f172a;
+    }
+    .login-shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e2e8f0;
+    }
+    .login-brand {
+      background: linear-gradient(145deg, #0f766e 0%, #0e7490 50%, #115e59 100%);
+      color: #fff;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      min-height: 520px;
+    }
+    .login-brand img {
+      height: 48px;
+      width: auto;
+      max-width: 280px;
+      background: transparent;
+      display: block;
+    }
+    .login-brand h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-top: 20px;
+    }
+    .login-brand p {
+      margin-top: 12px;
+      font-weight: 500;
+      opacity: 0.92;
+      line-height: 1.55;
+      max-width: 340px;
+    }
+    .brand-points {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .brand-points div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .brand-points span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #F5C518;
+      flex-shrink: 0;
+    }
+    .login-panel {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .login-panel .logo-top {
+      display: none;
+      margin-bottom: 20px;
+    }
+    .login-panel .logo-top img {
+      height: 40px;
+      background: transparent;
+    }
+    .login-panel h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .login-panel .sub {
+      color: #64748b;
+      font-size: 13.5px;
+      font-weight: 500;
+      margin: 8px 0 24px;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      background: #fff;
+    }
+    .form-control:focus {
+      border-color: #0d9488;
+      box-shadow: 0 0 0 3px rgba(13,148,136,0.15);
+    }
+    .row-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 6px 0 18px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .row-between label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 16px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #0d9488, #0ea5a0);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(13,148,136,0.25);
+    }
+    .btn:hover { filter: brightness(1.03); }
+    .btn-outline {
+      background: #fff;
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
+      box-shadow: none;
+      margin-top: 10px;
+    }
+    .links {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .links a { color: #0f766e; text-decoration: none; }
+    .demo-hint {
+      margin-top: 16px;
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f766e;
+      line-height: 1.45;
+    }
+    .toast {
+      position: fixed; top: 18px; right: 18px;
+      background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid #0d9488;
+      border-radius: 12px; padding: 12px 14px; box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+      font-weight: 650; font-size: 13px; display: none; z-index: 20;
+    }
+    .toast.show { display: block; }
+    @media (max-width: 860px) {
+      .login-shell { grid-template-columns: 1fr; }
+      .login-brand { min-height: 0; padding: 28px 24px; }
+      .login-panel { padding: 28px 22px 32px; }
+      .login-panel .logo-top { display: block; }
+      .login-brand .hide-mobile-logo { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toast" id="toast">Giriş başarılı — panele yönlendiriliyorsunuz</div>
+  <div class="login-shell">
+    <aside class="login-brand">
+      <div>
+        <img class="hide-mobile-logo" src="assets/images/obsidia-digital-logo-white.png" alt="ObsidiaDigital">
+        <h1>Emlak ofisinizi tek panelden yönetin</h1>
+        <p>Portföy, lead, yer gösterme, teklif, sözleşme, kasa ve komisyon süreçleri ObsidiaDigital EmlakPro ile bir arada.</p>
+        <div class="brand-points">
+          <div><span></span> Danışman saha paneli</div>
+          <div><span></span> Lead kanban &amp; otomatik eşleştirme</div>
+          <div><span></span> Komisyon ve kasa takibi</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:600;opacity:.95;display:flex;align-items:center;flex-wrap:wrap;gap:6px">
+        Engineered By <strong>Obsidia Digital</strong>
+        · Made With
+        <span aria-hidden="true" style="display:inline-flex;line-height:0">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z" fill="#C4A484"/>
+            <path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M5 19h10" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M8 4c0 1-.5 1.5-.5 2.5S8 8 8 8" stroke="#7DD3FC" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M11 3.5c0 1-.5 1.5-.5 2.5S11 7.5 11 7.5" stroke="#7DD3FC" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        and
+        <span aria-hidden="true" style="display:inline-flex;line-height:0">
+          <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21s-6.5-4.35-9.2-8.1C.8 10.2 1.4 6.8 4.2 5.4c1.8-.9 4-.4 5.3 1.2L12 9l2.5-2.4c1.3-1.6 3.5-2.1 5.3-1.2 2.8 1.4 3.4 4.8 1.4 7.5C18.5 16.65 12 21 12 21z" fill="#FB7185"/>
+          </svg>
+        </span>
+      </div>
+    </aside>
+
+    <section class="login-panel">
+      <div class="logo-top">
+        <img src="assets/images/obsidia-digital-logo.png" alt="ObsidiaDigital">
+      </div>
+      <h2>Emlakçı Girişi</h2>
+      <p class="sub">Şube danışmanı, müdür veya muhasebe hesabınızla oturum açın.</p>
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label for="email">E-posta</label>
+          <input class="form-control" id="email" type="email" value="ahmet@emlakpro.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input class="form-control" id="password" type="password" value="demo1234" required>
+        </div>
+        <div class="row-between">
+          <label><input type="checkbox" checked> Beni hatırla</label>
+          <a href="#" onclick="alert('Demo: şifre sıfırlama simülasyonu');return false;">Şifremi unuttum</a>
+        </div>
+        <button class="btn" type="submit">Giriş Yap</button>
+        <button class="btn btn-outline" type="button" onclick="location.href='index.html'">Demo Panele Git</button>
+      </form>
+      <div class="demo-hint">
+        Demo hesap: <strong>ahmet@emlakpro.com</strong> / <strong>demo1234</strong><br>
+        Giriş sonrası yönetim paneline yönlendirilirsiniz.
+      </div>
+      <div class="links">
+        <a href="public/index.html">Son kullanıcı vitrini</a>
+        ·
+        <a href="index.html">Admin paneli</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      if (!email || !password) {
+        alert('Lütfen e-posta ve şifre giriniz.');
+        return;
+      }
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      localStorage.setItem('emlakpro_session', JSON.stringify({ email, at: Date.now() }));
+      setTimeout(() => { location.href = 'index.html#dashboard'; }, 700);
+    });
+  </script>
+</body>
+</html>
