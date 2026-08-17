@@ -4,11 +4,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 
+DEMO_BASE = "/ozlumetal/"
+DEMO_ORIGIN = "https://www.obsidiademo.com.tr/ozlumetal"
+
 HEAD = '''<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="{base}">
   <title>{title}</title>
   <meta name="description" content="{description}">
   <link rel="canonical" href="{canonical}">
@@ -17,13 +21,13 @@ HEAD = '''<!DOCTYPE html>
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{description}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="assets/images/products/boyali-rulo.webp">
+  <meta property="og:image" content="{ogimage}">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:site_name" content="Özlü Metal">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{title}">
   <meta name="twitter:description" content="{description}">
-  <meta name="twitter:image" content="assets/images/products/boyali-rulo.webp">
+  <meta name="twitter:image" content="{ogimage}">
   <link rel="icon" type="image/png" href="assets/icons/favicon.png">
   <link rel="apple-touch-icon" href="assets/icons/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,6 +92,8 @@ SCHEMA_ORG = '''
 def breadcrumb(items):
     els = []
     for i, (name, url) in enumerate(items, 1):
+        if not url.startswith("http"):
+            url = DEMO_ORIGIN.rstrip("/") + "/" + url.lstrip("/")
         els.append('{"@type":"ListItem","position":%d,"name":"%s","item":"%s"}' % (i, name, url))
     joined = ",".join(els)
     return ',\n      {"@type":"BreadcrumbList","itemListElement":[%s]}' % joined
@@ -915,8 +921,18 @@ def page(filename, title, description, body, active=None, extra="", crumbs=None)
         "active_con": "is-active" if active == "con" else "",
     }
     bc = breadcrumb(crumbs or [("Anasayfa", "index.html")])
+    canon = DEMO_ORIGIN.rstrip("/") + "/" + filename
+    ogimage = DEMO_ORIGIN.rstrip("/") + "/assets/images/products/boyali-rulo.webp"
     html = (
-        HEAD.format(title=title, description=description, canonical=filename, ogtype="website", extra_head=extra)
+        HEAD.format(
+            title=title,
+            description=description,
+            canonical=canon,
+            ogtype="website",
+            extra_head=extra,
+            base=DEMO_BASE,
+            ogimage=ogimage,
+        )
         + SCHEMA_ORG.replace("{breadcrumb}", bc)
         + HEADER.format(**act)
         + body
