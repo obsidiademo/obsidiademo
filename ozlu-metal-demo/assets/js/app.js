@@ -681,6 +681,12 @@
     document.body.classList.toggle("no-scroll", on);
   }
 
+  function icons() {
+    try {
+      if (window.lucide && typeof lucide.createIcons === "function") lucide.createIcons();
+    } catch (err) {}
+  }
+
   function trapFocus(container) {
     const nodes = $$("a, button, input, select, textarea, [tabindex]:not([tabindex='-1'])", container)
       .filter((n) => !n.hasAttribute("disabled") && n.offsetParent !== null);
@@ -737,60 +743,65 @@
   function headerScroll() {
     const header = $(".site-header");
     if (!header) return;
-    const on = window.scrollY > 12;
-    header.classList.toggle("is-scrolled", on);
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
   }
 
   function bindHeader() {
     headerScroll();
     window.addEventListener("scroll", headerScroll, { passive: true });
-
-    const toggle = $(".menu-toggle");
-    const drawer = $(".mobile-drawer");
-    const backdrop = $(".drawer-backdrop");
-    if (toggle && drawer) {
-      toggle.addEventListener("click", () => {
-        const open = !drawer.classList.contains("is-open");
-        drawer.classList.toggle("is-open", open);
-        backdrop && backdrop.classList.toggle("is-open", open);
-        toggle.setAttribute("aria-expanded", String(open));
-        lockScroll(open);
-      });
-    }
-    backdrop && backdrop.addEventListener("click", () => closeOverlay());
-    $$("[data-close-drawer]").forEach((b) => b.addEventListener("click", () => closeOverlay()));
-
-    $$(".drawer-acc-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const acc = btn.closest(".drawer-acc");
-        const open = !acc.classList.contains("open");
+    document.addEventListener("click", (e) => {
+      const toggle = e.target.closest("#menu-toggle");
+      if (toggle) {
+        const drawer = $("#mobile-drawer");
+        const backdrop = $("#drawer-backdrop");
+        const open = drawer && !drawer.classList.contains("is-open");
+        if (drawer) drawer.classList.toggle("is-open", !!open);
+        if (backdrop) backdrop.classList.toggle("is-open", !!open);
+        toggle.setAttribute("aria-expanded", String(!!open));
+        lockScroll(!!open);
+        return;
+      }
+      if (e.target.closest("[data-close-drawer]") || e.target.closest("#drawer-backdrop")) {
+        closeOverlay();
+        return;
+      }
+      const accBtn = e.target.closest(".drawer-acc-btn");
+      if (accBtn) {
+        const acc = accBtn.closest(".drawer-acc");
+        const openAcc = !acc.classList.contains("open");
         $$(".drawer-acc").forEach((a) => a.classList.remove("open"));
-        acc.classList.toggle("open", open);
-        btn.setAttribute("aria-expanded", String(open));
-      });
-    });
-
-    $$("[data-open-search]").forEach((b) =>
-      b.addEventListener("click", () => {
+        acc.classList.toggle("open", openAcc);
+        accBtn.setAttribute("aria-expanded", String(openAcc));
+        return;
+      }
+      const search = e.target.closest("[data-open-search]");
+      if (search) {
         openOverlay("search-overlay");
         const input = $("#search-input");
         if (input) setTimeout(() => input.focus(), 50);
-      })
-    );
-    $$("[data-open-quote]").forEach((b) =>
-      b.addEventListener("click", (e) => {
-        const product = b.getAttribute("data-product");
-        if (product) {
-          const sel = $("#quote-product");
-          if (sel) sel.value = product;
-        }
+        return;
+      }
+      const quote = e.target.closest("[data-open-quote]");
+      if (quote) {
+        e.preventDefault();
+        const product = quote.getAttribute("data-product");
+        const sel = $("#quote-product");
+        if (product && sel) sel.value = product;
         openOverlay("quote-overlay");
-      })
-    );
-    $$("[data-close-overlay]").forEach((b) =>
-      b.addEventListener("click", () => closeOverlay(b.getAttribute("data-close-overlay")))
-    );
-
+        return;
+      }
+      const closeBtn = e.target.closest("[data-close-overlay]");
+      if (closeBtn) {
+        closeOverlay(closeBtn.getAttribute("data-close-overlay"));
+        return;
+      }
+      const filter = e.target.closest(".filter-btn");
+      if (filter) {
+        $$(".filter-btn").forEach((b) => b.classList.remove("is-active"));
+        filter.classList.add("is-active");
+        renderFeatured(filter.dataset.filter);
+      }
+    });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeOverlay();
     });
@@ -816,7 +827,7 @@
       if (aside) {
         aside.innerHTML = `<img src="${cat.image}" alt="${cat.name}" width="560" height="420"><div class="mega-copy"><h3>${cat.name}</h3><p>${cat.text}</p></div>`;
       }
-      if (window.lucide) lucide.createIcons();
+      icons();
     }
     cats.forEach((c) => {
       c.addEventListener("mouseenter", () => show(c.dataset.cat));
@@ -824,6 +835,31 @@
       c.addEventListener("click", () => show(c.dataset.cat));
     });
     show("galvanizli");
+
+    const header = $(".site-header");
+    const trigger = $(".has-mega");
+    const mega = $("#mega-menu");
+    let megaTimer;
+    function openMega() {
+      clearTimeout(megaTimer);
+      header && header.classList.add("mega-open");
+    }
+    function closeMega() {
+      megaTimer = setTimeout(() => header && header.classList.remove("mega-open"), 160);
+    }
+    if (header && trigger && mega) {
+      trigger.addEventListener("mouseenter", openMega);
+      trigger.addEventListener("focusin", openMega);
+      trigger.addEventListener("mouseleave", closeMega);
+      mega.addEventListener("mouseenter", openMega);
+      mega.addEventListener("mouseleave", closeMega);
+      trigger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          header.classList.toggle("mega-open");
+        }
+      });
+    }
   }
 
   function bindSearch() {
@@ -891,7 +927,7 @@
         </article>`
       )
       .join("");
-    if (window.lucide) lucide.createIcons();
+    icons();
     $$("[data-open-quote]", grid).forEach((b) =>
       b.addEventListener("click", () => {
         const sel = $("#quote-product");
@@ -1075,7 +1111,7 @@
         openOverlay("quote-overlay");
       })
     );
-    if (window.lucide) lucide.createIcons();
+    icons();
   }
 
   function renderProductsPage() {
@@ -1163,7 +1199,7 @@
     bindTabs();
     renderProductPage();
     renderProductsPage();
-    if (window.lucide) lucide.createIcons();
+    icons();
     const hash = (location.hash || "").replace("#", "");
     if (hash) {
       const map = { vizyon: "tab-vizyon", misyon: "tab-misyon", degerler: "tab-deger", deger: "tab-deger", hakkimizda: "tab-about" };
@@ -1171,7 +1207,7 @@
       const tabBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
       if (tabBtn) tabBtn.click();
     }
-    if (window.lucide) lucide.createIcons();
+    icons();
     $$(".overlay").forEach((el) => {
       el.addEventListener("click", (e) => {
         if (e.target === el) closeOverlay(el.id);

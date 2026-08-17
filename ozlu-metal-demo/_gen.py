@@ -327,7 +327,7 @@ FOOTER = '''
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script src="assets/js/lucide.min.js" defer></script>
   <script src="assets/js/app.js" defer></script>
 </body>
 </html>
@@ -402,7 +402,7 @@ INDEX = r'''
           <div class="cat-card-body"><div><h3>Galvanizli Sac</h3><p>9 alt ürün · trapez, rulo, mahya</p></div><span class="cat-arrow" aria-hidden="true"><i data-lucide="arrow-up-right"></i></span></div>
         </a>
         <a class="cat-card" href="products.html#boyali">
-          <img src="assets/images/products/boyali-rulo.webp" alt="Boyalı sac ruloları" width="872" height="600" loading="lazy">
+          <img src="assets/images/products/boyali-trapez.webp" alt="Boyalı trapez sac" width="872" height="600" loading="lazy">
           <div class="cat-card-body"><div><h3>Boyalı Sac</h3><p>8 alt ürün · renkli çatı ve cephe</p></div><span class="cat-arrow" aria-hidden="true"><i data-lucide="arrow-up-right"></i></span></div>
         </a>
         <a class="cat-card" href="product-detail.html?id=beton-alti-trapez-sac">
