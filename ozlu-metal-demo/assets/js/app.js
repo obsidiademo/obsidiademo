@@ -731,6 +731,7 @@
       const backdrop = $("#drawer-backdrop");
       const toggle = $("#menu-toggle");
       drawer && drawer.classList.remove("is-open");
+      drawer && drawer.setAttribute("aria-hidden", "true");
       backdrop && backdrop.classList.remove("is-open");
       toggle && toggle.setAttribute("aria-expanded", "false");
     }
@@ -752,7 +753,10 @@
       const drawer = $("#mobile-drawer");
       const backdrop = $("#drawer-backdrop");
       const open = drawer && !drawer.classList.contains("is-open");
-      if (drawer) drawer.classList.toggle("is-open", !!open);
+      if (drawer) {
+        drawer.classList.toggle("is-open", !!open);
+        drawer.setAttribute("aria-hidden", open ? "false" : "true");
+      }
       if (backdrop) backdrop.classList.toggle("is-open", !!open);
       toggle.setAttribute("aria-expanded", String(!!open));
       lockScroll(!!open);

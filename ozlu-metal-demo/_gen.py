@@ -408,11 +408,11 @@ INDEX = r'''
           <div class="cat-card-body"><div><h3>Galvanizli Sac</h3><p>9 alt ürün · trapez, rulo, mahya</p></div><span class="cat-arrow" aria-hidden="true"><i data-lucide="arrow-up-right"></i></span></div>
         </a>
         <a class="cat-card" href="products.html#boyali">
-          <img src="assets/images/products/boyali-trapez.webp" alt="Boyalı trapez sac" width="872" height="600" loading="lazy">
+          <img src="assets/images/factory/boyali-sac-hat.webp" alt="Boyalı sac rulo stok alanı" width="1600" height="626" loading="lazy">
           <div class="cat-card-body"><div><h3>Boyalı Sac</h3><p>8 alt ürün · renkli çatı ve cephe</p></div><span class="cat-arrow" aria-hidden="true"><i data-lucide="arrow-up-right"></i></span></div>
         </a>
         <a class="cat-card" href="product-detail.html?id=beton-alti-trapez-sac">
-          <img src="assets/images/products/beton-alti-trapez.webp" alt="Beton altı trapez sac" width="872" height="600" loading="lazy">
+          <img src="assets/images/products/beton-alti-doseme.webp" alt="50/980 beton altı döşeme trapezi" width="872" height="600" loading="lazy">
           <div class="cat-card-body"><div><h3>Beton Altı Trapez</h3><p>2 ürün · kompozit döşeme</p></div><span class="cat-arrow" aria-hidden="true"><i data-lucide="arrow-up-right"></i></span></div>
         </a>
         <a class="cat-card" href="product-detail.html?id=eksiz-oluk-sistemleri">
