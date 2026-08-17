@@ -1404,6 +1404,7 @@ body.no-scroll { overflow: hidden; }
     justify-self: end;
     margin-left: 0;
   }
+  .header-actions a.btn-icon { display: none; }
   .logo img { height: 48px; max-width: 240px; }
   .cat-grid { grid-template-columns: repeat(3, 1fr); }
   .product-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1413,6 +1414,7 @@ body.no-scroll { overflow: hidden; }
 
 @media (min-width: 1280px) {
   .header-inner { gap: 12px; }
+  .header-actions a.btn-icon { display: inline-flex; }
   .nav-list > li > a,
   .nav-list > li > button.nav-link {
     padding: 10px 12px;
