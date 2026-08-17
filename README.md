@@ -1,5 +1,7 @@
 # Özlü Metal — Premium HTML Demo
 
+Canlı adres: **https://www.obsidiademo.com.tr/ozlumetal/**
+
 Kurumsal site demosu `ozlu-metal-demo/` klasöründedir.
 
 ```bash

@@ -1,5 +1,7 @@
 # Özlü Metal — Premium Kurumsal Web Sitesi Demo
 
+Canlı demo: **https://www.obsidiademo.com.tr/ozlumetal/**
+
 1983’ten beri faaliyet gösteren Özlü Metal Sanayi ve Ticaret Ltd. Şti. için hazırlanmış **Light Industrial Premium** HTML demosudur.
 
 Mevcut site (`https://ozlumetal.com/`) kaynak alınarak ürünler, hizmetler, kurumsal metinler, iletişim bilgileri ve gerçek görseller korunmuş; arayüz sıfırdan tasarlanmıştır.
