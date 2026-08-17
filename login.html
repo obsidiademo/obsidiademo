@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/akillikurs/">
+  <title>Giriş Yap — Akıllı Okul</title>
+  <meta name="description" content="Akıllı Okul hesabınıza giriş yapın">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/style.css?v=6" rel="stylesheet">
+  <link rel="icon" href="assets/images/logo.svg?v=6" type="image/svg+xml">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="text-center mb-4">
+        <a href="index.html" class="ako-logo" style="justify-content:center"><img src="assets/images/logo.svg?v=6" alt="Akıllı Okul" width="48" height="48"><span class="ako-logo-text">Akıllı Okul</span></a>
+        <h2 class="mt-3">Hoş Geldiniz</h2>
+        <p class="text-muted">Hesabınıza giriş yapın</p>
+      </div>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">E-posta</label>
+          <div class="input-group"><span class="input-group-text"><i class="fa-solid fa-envelope"></i></span><input type="email" class="form-control" id="loginEmail" placeholder="ornek@akilliokul.com" required></div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Şifre</label>
+          <div class="input-group"><span class="input-group-text"><i class="fa-solid fa-lock"></i></span><input type="password" class="form-control" id="loginPassword" placeholder="••••••" required><button type="button" class="btn btn-outline-secondary" id="togglePass"><i class="fa-solid fa-eye"></i></button></div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <label class="form-check"><input type="checkbox" class="form-check-input" id="rememberMe"> Beni hatırla</label>
+          <a href="#" class="small" id="forgotPass">Şifremi unuttum</a>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 btn-lg">Giriş Yap</button>
+      </form>
+      <div class="demo-accounts mt-4">
+        <p class="text-muted small text-center mb-2">Demo Hesapları (tıkla)</p>
+        <div class="demo-grid">
+          <button class="demo-btn" data-email="admin@akilliokul.com" data-pass="123456"><i class="fa-solid fa-shield"></i> Admin</button>
+          <button class="demo-btn" data-email="egitmen@akilliokul.com" data-pass="123456"><i class="fa-solid fa-chalkboard-user"></i> Eğitmen</button>
+          <button class="demo-btn" data-email="ogrenci@akilliokul.com" data-pass="123456"><i class="fa-solid fa-user-graduate"></i> Öğrenci</button>
+          <button class="demo-btn" data-email="finans@akilliokul.com" data-pass="123456"><i class="fa-solid fa-wallet"></i> Finans</button>
+        </div>
+      </div>
+      <p class="text-center mt-4 small text-muted">Hesabınız yok mu? <a href="index.html">Ana sayfaya dön</a></p>
+    </div>
+    <div class="login-visual d-none d-lg-flex">
+      <div class="login-visual-content">
+        <h1>Öğrenmenin Yeni Nesli</h1>
+        <p>İstediğin Yerde, İstediğin Zaman Öğren.</p>
+        <div class="login-features">
+          <div><i class="fa-solid fa-play-circle"></i> 30+ Online Kurs</div>
+          <div><i class="fa-solid fa-video"></i> Canlı Zoom Dersler</div>
+          <div><i class="fa-solid fa-certificate"></i> Sertifikalı Eğitim</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="toastContainer"></div>
+  <script src="assets/js/base.js?v=6"></script>
+  <script src="assets/js/data.js?v=6"></script>
+  <script src="assets/js/storage.js?v=6"></script>
+  <script>
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('ako_theme') || 'light');
+    document.getElementById('loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const account = AKO.demoAccounts.find(a => a.email === email && a.password === password);
+      if (account) {
+        Storage.setUser({ name: account.name, email: account.email, avatar: account.avatar, role: account.role });
+        Storage.setRole(account.role);
+        if (account.role === 'student') Storage.set(Storage.KEYS.enrolled, [1]);
+        const redirects = { admin: 'index.html#/admin', instructor: 'index.html#/instructor', finance: 'index.html#/finance', student: 'index.html#/dashboard' };
+        window.location.href = redirects[account.role] || 'index.html#/dashboard';
+      } else {
+        showToast('Geçersiz e-posta veya şifre.', 'error');
+      }
+    });
+    document.querySelectorAll('.demo-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.getElementById('loginEmail').value = btn.dataset.email;
+      document.getElementById('loginPassword').value = btn.dataset.pass;
+    }));
+    document.getElementById('togglePass').addEventListener('click', () => {
+      const inp = document.getElementById('loginPassword');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('forgotPass').addEventListener('click', e => { e.preventDefault(); showToast('Şifre sıfırlama linki e-postanıza gönderildi.', 'info'); });
+    function showToast(msg, type) {
+      const el = document.createElement('div');
+      el.className = `ako-toast toast-${type} show`;
+      el.innerHTML = `<i class="fa-solid fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i><span>${msg}</span>`;
+      document.getElementById('toastContainer').appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
