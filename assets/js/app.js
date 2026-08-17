@@ -85,6 +85,7 @@ const App = {
     if (hash === '/admin' || hash.startsWith('/admin')) this.initAdminCharts();
     if (hash === '/instructor' || hash === '/instructor/earnings') this.initInstructorCharts();
     if (hash.startsWith('/live/') && !hash.includes('sessions')) this.initLiveRoom();
+    this.initPromoStrip();
     this.initSkeleton();
   },
 
@@ -511,6 +512,27 @@ const App = {
     document.getElementById('saveIyzico')?.addEventListener('click', () => Components.toast('iyzico ayarı kaydedildi (demo).'));
     document.getElementById('savePaytr')?.addEventListener('click', () => Components.toast('PayTR ayarı kaydedildi (demo).'));
     document.getElementById('saveStripe')?.addEventListener('click', () => Components.toast('Stripe ayarı kaydedildi (demo).'));
+  },
+
+  initPromoStrip() {
+    const strip = document.getElementById('promoStrip');
+    if (!strip) return;
+    const slides = [...strip.querySelectorAll('.promo-slide')];
+    const dots = [...strip.querySelectorAll('.promo-dot')];
+    if (slides.length < 2) return;
+    let idx = 0;
+    if (this._promoTimer) clearInterval(this._promoTimer);
+    const show = i => {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+      dots.forEach((d, n) => d.classList.toggle('active', n === idx));
+    };
+    dots.forEach(d => d.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      show(Number(d.dataset.promoDot));
+    }));
+    this._promoTimer = setInterval(() => show(idx + 1), 4500);
   },
 
   initSkeleton() {

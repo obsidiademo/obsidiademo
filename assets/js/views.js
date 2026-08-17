@@ -23,7 +23,15 @@ const Views = {
     const enrolled = Storage.getEnrolled();
     const recommended = AKO.courses.filter(c => !enrolled.includes(c.id)).slice(0, 3);
     return this.layout(`
-      ${AKO.campaigns.filter(c => c.active).map(c => `<div class="campaign-banner" style="background:${c.banner}"><div class="container"><strong>${c.title}</strong> — ${c.desc} <a href="#/courses" class="btn btn-light btn-sm ms-2">Keşfet</a></div></div>`).join('')}
+      <div class="promo-strip" id="promoStrip">
+        ${AKO.campaigns.filter(c => c.active).map((c, i) => `<a href="#/courses${c.category ? '?cat=' + c.category : ''}" class="promo-slide ${i === 0 ? 'active' : ''}" style="background:${c.banner}" data-promo="${i}">
+          <span class="promo-kicker">Kampanya</span>
+          <strong>${c.title}</strong>
+          <span class="promo-desc">— ${c.desc}</span>
+          <span class="promo-cta">Keşfet <i class="fa-solid fa-arrow-right"></i></span>
+        </a>`).join('')}
+        <div class="promo-dots">${AKO.campaigns.filter(c => c.active).map((_, i) => `<button type="button" class="promo-dot ${i === 0 ? 'active' : ''}" data-promo-dot="${i}" aria-label="Kampanya ${i + 1}"></button>`).join('')}</div>
+      </div>
       <section class="hero-section">
         <div class="container">
           <div class="row align-items-center">
