@@ -2,7 +2,7 @@
 const Components = {
   logo(size = 'md') {
     const h = size === 'sm' ? 32 : size === 'lg' ? 48 : 40;
-    return `<a href="#/" class="ako-logo"><img src="assets/images/logo.svg" alt="Akıllı Okul" height="${h}"></a>`;
+    return `<a href="#/" class="ako-logo"><img src="assets/images/logo.svg" alt="Akıllı Okul" width="${h}" height="${h}"><span class="ako-logo-text"><span class="brand-top">Akıllı</span><span class="brand-bottom">Okul</span></span></a>`;
   },
 
   courseCard(course, opts = {}) {
@@ -107,7 +107,7 @@ const Components = {
     return `<footer class="ako-footer">
       <div class="container">
         <div class="row g-4">
-          <div class="col-lg-4"><img src="assets/images/logo.svg" alt="Akıllı Okul" height="40" class="mb-3"><p>${AKO.brand.description}</p><p class="slogan">${AKO.brand.slogan}</p></div>
+          <div class="col-lg-4"><div class="ako-logo mb-3"><img src="assets/images/logo.svg" alt="Akıllı Okul" width="40" height="40"><span class="ako-logo-text"><span class="brand-top" style="color:#fff">Akıllı</span><span class="brand-bottom" style="color:#67E8F9">Okul</span></span></div><p>${AKO.brand.description}</p><p class="slogan">${AKO.brand.slogan}</p></div>
           <div class="col-6 col-lg-2"><h6>Platform</h6><ul><li><a href="#/courses">Kurslar</a></li><li><a href="#/become-instructor">Eğitmen Ol</a></li><li><a href="#/certificate-verify">Sertifika Doğrula</a></li></ul></div>
           <div class="col-6 col-lg-2"><h6>Destek</h6><ul><li><a href="#">Yardım Merkezi</a></li><li><a href="#">SSS</a></li><li><a href="#">İletişim</a></li></ul></div>
           <div class="col-6 col-lg-2"><h6>Yasal</h6><ul><li><a href="#">Kullanım Koşulları</a></li><li><a href="#">Gizlilik</a></li><li><a href="#">KVKK</a></li></ul></div>
@@ -186,6 +186,7 @@ const Components = {
         ]},
         { section: 'Sistem', items: [
           { id: 'admin-users', icon: 'fa-user-shield', label: 'Kullanıcılar', href: '#/admin/users' },
+          { id: 'admin-integrations', icon: 'fa-plug', label: 'Entegrasyonlar', href: '#/admin/integrations' },
           { id: 'admin-settings', icon: 'fa-gear', label: 'Ayarlar', href: '#/admin/settings' },
           { id: 'admin-logs', icon: 'fa-list', label: 'Sistem Logları', href: '#/admin/logs' }
         ]}

@@ -66,6 +66,9 @@ const App = {
     Router.register('/admin/payments', () => Views.adminPayments());
     Router.register('/admin/commission', () => Views.adminCommission());
     Router.register('/admin/settings', () => Views.adminSettings());
+    Router.register('/admin/integrations', () => Views.adminIntegrations());
+    Router.register('/admin/live', () => Views.adminLive());
+    Router.register('/admin/certificates', () => Views.adminCertificates());
     Router.register('/admin/logs', () => Views.adminLogs());
     Router.register('/admin/users', () => Views.adminUsers());
     Router.register('/finance', () => Views.financeDashboard());
@@ -214,6 +217,7 @@ const App = {
     if (newCoupon) newCoupon.addEventListener('click', () => Components.toast('Kupon oluşturma formu açıldı.'));
     const addCat = document.getElementById('addCategory');
     if (addCat) addCat.addEventListener('click', () => Components.toast('Kategori ekleme formu açıldı.'));
+    this.initIntegrations();
   },
 
   initSearch(inputId, resultsId) {
@@ -458,6 +462,55 @@ const App = {
     document.body.insertAdjacentHTML('beforeend', html);
     new bootstrap.Modal(document.getElementById('invoiceModal')).show();
     document.getElementById('invoiceModal').addEventListener('hidden.bs.modal', () => document.getElementById('invoiceModal').remove());
+  },
+
+  initIntegrations() {
+    const form = document.getElementById('zoomForm');
+    if (!form) return;
+    const collect = () => ({
+      enabled: document.getElementById('zoomEnabled')?.checked || false,
+      accountId: document.getElementById('zoomAccountId')?.value.trim() || '',
+      clientId: document.getElementById('zoomClientId')?.value.trim() || '',
+      clientSecret: document.getElementById('zoomClientSecret')?.value || '',
+      sdkKey: document.getElementById('zoomSdkKey')?.value.trim() || '',
+      sdkSecret: document.getElementById('zoomSdkSecret')?.value || '',
+      webhookUrl: document.getElementById('zoomWebhook')?.value.trim() || '',
+      meetingSdk: document.getElementById('zoomMeetingSdk')?.checked || false,
+      oauthConnected: Storage.getZoomSettings().oauthConnected
+    });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      Storage.setZoomSettings(collect());
+      Components.toast('Zoom ayarları kaydedildi.');
+    });
+    document.getElementById('btnZoomOAuth')?.addEventListener('click', () => {
+      const s = collect();
+      if (!s.clientId) { Components.toast('Önce OAuth Client ID girin.', 'error'); return; }
+      s.oauthConnected = true;
+      s.enabled = true;
+      Storage.setZoomSettings(s);
+      const badge = document.getElementById('zoomStatusBadge');
+      if (badge) { badge.textContent = 'Bağlı'; badge.className = 'integration-status on'; }
+      Components.toast('Zoom OAuth bağlantısı simüle edildi.');
+    });
+    document.getElementById('btnZoomTest')?.addEventListener('click', () => {
+      const s = Storage.getZoomSettings();
+      if (!s.oauthConnected && !s.clientId) { Components.toast('Önce Zoom OAuth bağlayın.', 'error'); return; }
+      Components.toast('Test toplantısı oluşturuldu. Meeting ID: 847-293-116');
+      Router.navigate('/live/1');
+    });
+    document.getElementById('btnZoomDisconnect')?.addEventListener('click', () => {
+      const s = collect();
+      s.oauthConnected = false;
+      s.enabled = false;
+      Storage.setZoomSettings(s);
+      const badge = document.getElementById('zoomStatusBadge');
+      if (badge) { badge.textContent = 'Bağlı değil'; badge.className = 'integration-status off'; }
+      Components.toast('Zoom bağlantısı kesildi.', 'info');
+    });
+    document.getElementById('saveIyzico')?.addEventListener('click', () => Components.toast('iyzico ayarı kaydedildi (demo).'));
+    document.getElementById('savePaytr')?.addEventListener('click', () => Components.toast('PayTR ayarı kaydedildi (demo).'));
+    document.getElementById('saveStripe')?.addEventListener('click', () => Components.toast('Stripe ayarı kaydedildi (demo).'));
   },
 
   initSkeleton() {

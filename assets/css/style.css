@@ -49,18 +49,38 @@ a { color: var(--primary); text-decoration: none; transition: color var(--transi
 a:hover { color: var(--primary-dark); }
 img { max-width: 100%; height: auto; }
 
+.ako-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.ako-logo img { width: 40px; height: 40px; max-width: 40px !important; object-fit: contain; flex-shrink: 0; }
+.ako-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.ako-logo-text .brand-top { font-weight: 700; font-size: 0.95rem; color: var(--primary-dark); }
+.ako-logo-text .brand-bottom { font-weight: 700; font-size: 0.95rem; color: var(--primary); }
+
 .ako-loader {
-  position: fixed; inset: 0; z-index: 9999;
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9999;
   background: var(--bg);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: opacity 0.5s, visibility 0.5s;
 }
 .ako-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.ako-loader h2 { font-weight: 700; color: var(--primary-dark); margin: 1rem 0 0.5rem; }
-.ako-loader p { color: var(--text-muted); }
-.loader-bar { width: 200px; height: 4px; background: var(--border); border-radius: 2px; margin-top: 1.5rem; overflow: hidden; }
-.loader-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--cyan)); animation: loadBar 1.2s ease forwards; }
+.ako-loader-inner {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; width: 280px; margin: 0 auto;
+}
+.ako-loader .loader-logo {
+  width: 56px !important; height: 56px !important; max-width: 56px !important;
+  display: block; margin: 0 auto 16px; object-fit: contain;
+}
+.ako-loader h2 { font-weight: 700; color: var(--primary-dark); margin: 0 0 8px; font-size: 1.5rem; }
+.ako-loader p { color: var(--text-muted); margin: 0; }
+.loader-bar { width: 200px; height: 4px; background: var(--border); border-radius: 2px; margin: 20px auto 0; overflow: hidden; }
+.loader-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--cyan)); animation: loadBar 1.2s ease forwards; }
 @keyframes loadBar { from { width: 0; } to { width: 100%; } }
+
+.integration-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+.integration-card h3 { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.integration-status { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 50px; }
+.integration-status.off { background: rgba(100,116,139,0.15); color: var(--text-muted); }
+.integration-status.on { background: rgba(22,163,74,0.12); color: var(--success); }
 
 .ako-header {
   position: sticky; top: 0; z-index: 1000;

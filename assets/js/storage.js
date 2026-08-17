@@ -5,7 +5,8 @@ const Storage = {
     cart: 'ako_cart', favorites: 'ako_favorites', progress: 'ako_progress',
     quizResults: 'ako_quiz_results', lastWatched: 'ako_last_watched',
     notifications: 'ako_notifications', enrolled: 'ako_enrolled',
-    orders: 'ako_orders', profile: 'ako_profile', coupons: 'ako_coupons_used'
+    orders: 'ako_orders', profile: 'ako_profile', coupons: 'ako_coupons_used',
+    zoom: 'ako_zoom_settings', payments: 'ako_payment_settings'
   },
   get(key) {
     try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
@@ -88,5 +89,12 @@ const Storage = {
     this.set(this.KEYS.quizResults, all);
   },
   isCouponUsed(code) { return (this.get(this.KEYS.coupons) || []).includes(code); },
-  markCouponUsed(code) { const u = this.get(this.KEYS.coupons) || []; u.push(code); this.set(this.KEYS.coupons, u); }
+  markCouponUsed(code) { const u = this.get(this.KEYS.coupons) || []; u.push(code); this.set(this.KEYS.coupons, u); },
+  getZoomSettings() {
+    return this.get(this.KEYS.zoom) || {
+      enabled: false, accountId: '', clientId: '', clientSecret: '', sdkKey: '', sdkSecret: '',
+      webhookUrl: '', meetingSdk: true, oauthConnected: false
+    };
+  },
+  setZoomSettings(s) { this.set(this.KEYS.zoom, s); }
 };

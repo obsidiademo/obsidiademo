@@ -560,7 +560,64 @@ const Views = {
   },
 
   adminSettings() {
-    return this.layout(`<div class="container py-4"><h1>Sistem Ayarları</h1><div class="settings-tabs mt-4"><div class="mb-3"><h5>Entegrasyonlar</h5><p class="text-muted">Zoom OAuth, Meeting SDK, iyzico, PayTR, Stripe — API anahtarları server-side tutulmalıdır.</p></div><div class="mb-3"><h5>Güvenlik</h5><p class="text-muted">RBAC, JWT, Refresh Token, HttpOnly Cookie, CSRF, XSS, Rate Limiting, bcrypt, MFA, Audit Log</p></div></div></div>`, { sidebar: true, active: 'admin-settings' });
+    return this.layout(`<div class="container py-4"><h1>Sistem Ayarları</h1>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6"><a href="#/admin/integrations" class="integration-card d-block text-reset"><h3><i class="fa-solid fa-video" style="color:#2D8CFF"></i> Entegrasyonlar</h3><p class="text-muted mb-0">Zoom, iyzico, PayTR ve Stripe bağlantılarını yönetin.</p></a></div>
+        <div class="col-md-6"><div class="integration-card"><h3><i class="fa-solid fa-shield-halved"></i> Güvenlik</h3><p class="text-muted mb-0">RBAC, JWT, Refresh Token, HttpOnly Cookie, CSRF, XSS, Rate Limiting, bcrypt, MFA, Audit Log — production mimarisi server-side uygulanmalıdır.</p></div></div>
+      </div></div>`, { sidebar: true, active: 'admin-settings' });
+  },
+
+  adminIntegrations() {
+    const z = Storage.getZoomSettings();
+    const connected = z.oauthConnected;
+    return this.layout(`<div class="container py-4"><h1>Entegrasyonlar</h1><p class="text-muted">API anahtarları tarayıcıda yalnızca demo amaçlı saklanır. Canlı ortamda tüm secret'lar backend'de tutulmalıdır.</p>
+
+      <div class="integration-card" id="zoomIntegration">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+          <h3><i class="fa-solid fa-video" style="color:#2D8CFF"></i> Zoom Entegrasyonu</h3>
+          <span class="integration-status ${connected ? 'on' : 'off'}" id="zoomStatusBadge">${connected ? 'Bağlı' : 'Bağlı değil'}</span>
+        </div>
+        <p class="text-muted">Canlı dersler için Zoom OAuth, Meeting SDK ve Meeting API. Secret bilgileri frontend'e hard-code edilmez.</p>
+        <form id="zoomForm" class="row g-3">
+          <div class="col-12"><label class="form-check"><input type="checkbox" class="form-check-input" id="zoomEnabled" ${z.enabled ? 'checked' : ''}> Zoom canlı dersleri aktif</label></div>
+          <div class="col-md-6"><label>Account ID</label><input type="text" class="form-control" id="zoomAccountId" value="${z.accountId || ''}" placeholder="Zoom Account ID" autocomplete="off"></div>
+          <div class="col-md-6"><label>OAuth Client ID</label><input type="text" class="form-control" id="zoomClientId" value="${z.clientId || ''}" placeholder="Client ID" autocomplete="off"></div>
+          <div class="col-md-6"><label>OAuth Client Secret</label><input type="password" class="form-control" id="zoomClientSecret" value="${z.clientSecret || ''}" placeholder="Server-side tutulur" autocomplete="off"></div>
+          <div class="col-md-6"><label>Meeting SDK Key</label><input type="text" class="form-control" id="zoomSdkKey" value="${z.sdkKey || ''}" placeholder="SDK Key" autocomplete="off"></div>
+          <div class="col-md-6"><label>Meeting SDK Secret</label><input type="password" class="form-control" id="zoomSdkSecret" value="${z.sdkSecret || ''}" placeholder="Server-side signature" autocomplete="off"></div>
+          <div class="col-md-6"><label>Webhook URL</label><input type="url" class="form-control" id="zoomWebhook" value="${z.webhookUrl || ''}" placeholder="https://api.akilliokul.com/webhooks/zoom"></div>
+          <div class="col-12"><label class="form-check"><input type="checkbox" class="form-check-input" id="zoomMeetingSdk" ${z.meetingSdk ? 'checked' : ''}> Meeting SDK ile tarayıcı içi ders</label></div>
+          <div class="col-12 d-flex flex-wrap gap-2">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i> Zoom Ayarlarını Kaydet</button>
+            <button type="button" class="btn btn-outline-primary" id="btnZoomOAuth"><i class="fa-solid fa-link me-1"></i> Zoom OAuth Bağla</button>
+            <button type="button" class="btn btn-outline-secondary" id="btnZoomTest"><i class="fa-solid fa-vial me-1"></i> Test Toplantısı Oluştur</button>
+            <button type="button" class="btn btn-outline-danger" id="btnZoomDisconnect">Bağlantıyı Kes</button>
+          </div>
+        </form>
+        <div class="mt-3 small text-muted">
+          Backend alanları: Zoom OAuth · Zoom Meeting SDK · Meeting API · Meeting ID · Meeting Password · Meeting Token · Server-side signature
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4"><div class="integration-card h-100"><h3><i class="fa-solid fa-credit-card"></i> iyzico</h3><p class="text-muted small">API Key ve Secret backend'de tutulur.</p><input class="form-control mb-2" placeholder="API Key" id="iyzicoKey"><button class="btn btn-sm btn-outline-primary" id="saveIyzico">Kaydet</button></div></div>
+        <div class="col-md-4"><div class="integration-card h-100"><h3><i class="fa-solid fa-building-columns"></i> PayTR</h3><p class="text-muted small">Merchant ID / Key / Salt server-side.</p><input class="form-control mb-2" placeholder="Merchant ID" id="paytrId"><button class="btn btn-sm btn-outline-primary" id="savePaytr">Kaydet</button></div></div>
+        <div class="col-md-4"><div class="integration-card h-100"><h3><i class="fa-brands fa-stripe"></i> Stripe</h3><p class="text-muted small">Secret Key frontend'e yazılmaz.</p><input class="form-control mb-2" placeholder="Publishable Key" id="stripePk"><button class="btn btn-sm btn-outline-primary" id="saveStripe">Kaydet</button></div></div>
+      </div>
+    </div>`, { sidebar: true, active: 'admin-integrations' });
+  },
+
+  adminLive() {
+    const sessions = AKO.liveSessions;
+    return this.layout(`<div class="container py-4"><div class="d-flex justify-content-between align-items-center flex-wrap gap-2"><h1>Canlı Dersler</h1><a href="#/admin/integrations" class="btn btn-outline-primary btn-sm">Zoom Ayarları</a></div>
+      ${Components.table(['Ders','Tarih','Eğitmen','Katılımcı','Süre','Durum','İşlem'], sessions.map(s => {
+        const inst = AKO.getInstructor(s.instructorId);
+        return `<tr><td>${s.title}</td><td>${s.date} ${s.time}</td><td>${inst?.name || ''}</td><td>${s.participants}</td><td>${s.duration} dk</td><td><span class="badge bg-${s.status === 'upcoming' ? 'primary' : 'success'}">${s.status === 'upcoming' ? 'Yaklaşan' : 'Tamamlandı'}</span></td><td>${s.status === 'upcoming' ? `<button class="btn btn-sm btn-live btn-join-live" data-id="${s.id}">Katıl</button>` : (s.recording ? `<button class="btn btn-sm btn-outline-primary btn-watch-recording" data-id="${s.id}">Kayıt</button>` : '-')}</td></tr>`;
+      }))}</div>`, { sidebar: true, active: 'admin-live' });
+  },
+
+  adminCertificates() {
+    return this.layout(`<div class="container py-4"><h1>Sertifikalar</h1>${Components.table(['Sertifika No','Öğrenci','Kurs','Tarih','Durum'], AKO.certificates.map(c => `<tr><td><a href="#/certificate/${c.id}">${c.id}</a></td><td>${c.student}</td><td>${AKO.getCourse(c.courseId)?.title || ''}</td><td>${c.date}</td><td><span class="badge bg-success">${c.status === 'valid' ? 'Geçerli' : c.status}</span></td></tr>`))}</div>`, { sidebar: true, active: 'admin-certs' });
   },
 
   adminLogs() {
