@@ -746,65 +746,63 @@
     header.classList.toggle("is-scrolled", window.scrollY > 12);
   }
 
+  function onDocClick(e) {
+    const toggle = e.target.closest && e.target.closest("#menu-toggle");
+    if (toggle) {
+      const drawer = $("#mobile-drawer");
+      const backdrop = $("#drawer-backdrop");
+      const open = drawer && !drawer.classList.contains("is-open");
+      if (drawer) drawer.classList.toggle("is-open", !!open);
+      if (backdrop) backdrop.classList.toggle("is-open", !!open);
+      toggle.setAttribute("aria-expanded", String(!!open));
+      lockScroll(!!open);
+      return;
+    }
+    if (e.target.closest && (e.target.closest("[data-close-drawer]") || e.target.closest("#drawer-backdrop"))) {
+      closeOverlay();
+      return;
+    }
+    const accBtn = e.target.closest && e.target.closest(".drawer-acc-btn");
+    if (accBtn) {
+      const acc = accBtn.closest(".drawer-acc");
+      const openAcc = !acc.classList.contains("open");
+      $$(".drawer-acc").forEach((a) => a.classList.remove("open"));
+      acc.classList.toggle("open", openAcc);
+      accBtn.setAttribute("aria-expanded", String(openAcc));
+      return;
+    }
+    const search = e.target.closest && e.target.closest("[data-open-search]");
+    if (search) {
+      openOverlay("search-overlay");
+      const input = $("#search-input");
+      if (input) setTimeout(() => input.focus(), 50);
+      return;
+    }
+    const quote = e.target.closest && e.target.closest("[data-open-quote]");
+    if (quote) {
+      e.preventDefault();
+      const product = quote.getAttribute("data-product");
+      const sel = $("#quote-product");
+      if (product && sel) sel.value = product;
+      openOverlay("quote-overlay");
+      return;
+    }
+    const closeBtn = e.target.closest && e.target.closest("[data-close-overlay]");
+    if (closeBtn) {
+      closeOverlay(closeBtn.getAttribute("data-close-overlay"));
+      return;
+    }
+    const filter = e.target.closest && e.target.closest(".filter-btn");
+    if (filter) {
+      $$(".filter-btn").forEach((b) => b.classList.remove("is-active"));
+      filter.classList.add("is-active");
+      renderFeatured(filter.dataset.filter);
+    }
+  }
+
   function bindHeader() {
     headerScroll();
     window.addEventListener("scroll", headerScroll, { passive: true });
-    document.addEventListener("click", (e) => {
-      const toggle = e.target.closest("#menu-toggle");
-      if (toggle) {
-        const drawer = $("#mobile-drawer");
-        const backdrop = $("#drawer-backdrop");
-        const open = drawer && !drawer.classList.contains("is-open");
-        if (drawer) drawer.classList.toggle("is-open", !!open);
-        if (backdrop) backdrop.classList.toggle("is-open", !!open);
-        toggle.setAttribute("aria-expanded", String(!!open));
-        lockScroll(!!open);
-        return;
-      }
-      if (e.target.closest("[data-close-drawer]") || e.target.closest("#drawer-backdrop")) {
-        closeOverlay();
-        return;
-      }
-      const accBtn = e.target.closest(".drawer-acc-btn");
-      if (accBtn) {
-        const acc = accBtn.closest(".drawer-acc");
-        const openAcc = !acc.classList.contains("open");
-        $$(".drawer-acc").forEach((a) => a.classList.remove("open"));
-        acc.classList.toggle("open", openAcc);
-        accBtn.setAttribute("aria-expanded", String(openAcc));
-        return;
-      }
-      const search = e.target.closest("[data-open-search]");
-      if (search) {
-        openOverlay("search-overlay");
-        const input = $("#search-input");
-        if (input) setTimeout(() => input.focus(), 50);
-        return;
-      }
-      const quote = e.target.closest("[data-open-quote]");
-      if (quote) {
-        e.preventDefault();
-        const product = quote.getAttribute("data-product");
-        const sel = $("#quote-product");
-        if (product && sel) sel.value = product;
-        openOverlay("quote-overlay");
-        return;
-      }
-      const closeBtn = e.target.closest("[data-close-overlay]");
-      if (closeBtn) {
-        closeOverlay(closeBtn.getAttribute("data-close-overlay"));
-        return;
-      }
-      const filter = e.target.closest(".filter-btn");
-      if (filter) {
-        $$(".filter-btn").forEach((b) => b.classList.remove("is-active"));
-        filter.classList.add("is-active");
-        renderFeatured(filter.dataset.filter);
-      }
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeOverlay();
-    });
   }
 
   function bindMega() {
@@ -1184,7 +1182,7 @@
       `</optgroup>`;
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function boot() {
     bindHeader();
     bindMega();
     bindSearch();
@@ -1207,7 +1205,6 @@
       const tabBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
       if (tabBtn) tabBtn.click();
     }
-    icons();
     $$(".overlay").forEach((el) => {
       el.addEventListener("click", (e) => {
         if (e.target === el) closeOverlay(el.id);
@@ -1233,5 +1230,12 @@
         document.head.appendChild(s);
       }
     }
+  }
+
+  document.addEventListener("click", onDocClick, true);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeOverlay();
   });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();

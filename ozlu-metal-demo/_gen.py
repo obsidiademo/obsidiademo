@@ -327,8 +327,8 @@ FOOTER = '''
     </div>
   </div>
 
-  <script src="assets/js/lucide.min.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/lucide.min.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
 '''
