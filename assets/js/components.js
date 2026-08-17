@@ -52,8 +52,10 @@ const Components = {
     return `<header class="ako-header">
       <div class="container-fluid px-lg-4">
         <nav class="navbar navbar-expand-lg">
-          ${this.logo()}
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-top">
+            ${this.logo()}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+          </div>
           <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav header-nav-left">
               <li class="nav-item dropdown">

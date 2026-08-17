@@ -61,14 +61,26 @@ img { max-width: 100%; height: auto; }
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
-  height: var(--header-h);
+  min-height: var(--header-h);
 }
 .ako-header .navbar {
-  height: var(--header-h); padding: 0;
-  display: flex; align-items: center; flex-wrap: nowrap; gap: 8px;
+  min-height: var(--header-h); padding: 0;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0;
 }
-.ako-header .ako-logo { margin-right: 8px; padding-right: 20px; border-right: 1px solid var(--border); }
-.ako-header .navbar-toggler { border: none; color: var(--text); margin-left: auto; }
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: var(--header-h); gap: 12px;
+}
+.ako-header .ako-logo { margin-right: 0; padding-right: 0; border-right: none; }
+.ako-header .navbar-toggler {
+  border: none; color: var(--text); margin: 0; padding: 0;
+  width: 44px; height: 44px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px; background: transparent; box-shadow: none;
+  line-height: 1; font-size: 1.25rem;
+}
+.ako-header .navbar-toggler:focus { box-shadow: none; }
+.ako-header .navbar-collapse { width: 100%; }
 .header-nav-left {
   display: flex; align-items: center; gap: 4px; margin-right: 12px !important;
 }
@@ -404,6 +416,25 @@ img { max-width: 100%; height: auto; }
 .error-page { text-align: center; padding: 5rem 2rem; }
 .error-code { font-size: 5rem; font-weight: 700; color: var(--primary); }
 
+@media (min-width: 992px) {
+  .ako-header { height: var(--header-h); }
+  .ako-header .navbar { flex-wrap: nowrap; height: var(--header-h); }
+  .header-top { width: auto; min-height: auto; margin-right: 8px; padding-right: 20px; border-right: 1px solid var(--border); }
+  .ako-header .navbar-collapse { width: auto; display: flex !important; flex: 1; align-items: center; }
+  .ako-header .navbar-toggler { display: none; }
+}
+@media (max-width: 991.98px) {
+  .ako-header { height: auto; overflow: visible; }
+  .ako-header .container-fluid { padding-left: 16px; padding-right: 16px; }
+  .ako-logo-text { font-size: 1.1rem; }
+  .ako-header .navbar-collapse {
+    padding: 8px 0 16px;
+    border-top: 1px solid var(--border);
+  }
+  .header-nav-left { flex-direction: column; align-items: stretch; width: 100%; margin: 0 !important; }
+  .header-nav-left .nav-link { padding: 10px 4px !important; }
+  .ako-header .navbar-nav.ms-auto { align-items: flex-start !important; padding-top: 8px; }
+}
 @media (max-width: 768px) {
   .header-search-wrap { display: none; }
   .course-grid { grid-template-columns: 1fr; }
