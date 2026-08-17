@@ -8,9 +8,12 @@ const Router = {
     const hash = window.location.hash.slice(1) || '/';
     const [hashPath, queryStr] = hash.split('?');
     const params = {};
-    if (queryStr) queryStr.split('&').forEach(p => { const [k, v] = p.split('='); params[k] = decodeURIComponent(v || ''); });
+    if (queryStr) queryStr.split('&').forEach(p => {
+      const [k, v] = p.split('=');
+      try { params[k] = decodeURIComponent(v || ''); } catch { params[k] = v || ''; }
+    });
     this.currentParams = params;
-    const segments = hashPath.split('/').filter(Boolean);
+    const segments = (hashPath || '/').split('/').filter(Boolean);
     const path = segments.length ? '/' + segments.join('/') : '/';
     return { path, segments, params };
   },
@@ -39,16 +42,17 @@ const Router = {
   render() {
     const { handler, params } = this.resolve();
     const app = document.getElementById('app');
-    app.innerHTML = '<div class="page-loading"><div class="spinner"></div></div>';
-    setTimeout(() => {
-      try {
-        app.innerHTML = handler(params);
-        App.afterRender(params);
-      } catch (e) {
-        console.error(e);
-        app.innerHTML = Views.error('Sayfa yüklenirken bir hata oluştu.');
-      }
-    }, 150);
+    if (!app) return;
+    try {
+      const html = handler(params);
+      app.innerHTML = html || Views.notFound();
+    } catch (e) {
+      console.error(e);
+      try { app.innerHTML = Views.error('Sayfa yüklenirken bir hata oluştu.'); }
+      catch { app.innerHTML = '<div class="error-page"><h1>Bir sorun oluştu</h1><a href="#/" class="btn btn-primary">Ana Sayfa</a></div>'; }
+      return;
+    }
+    try { App.afterRender(params); } catch (e) { console.error(e); }
     window.scrollTo(0, 0);
   },
   init() {

@@ -5,9 +5,9 @@ const Components = {
   },
 
   courseCard(course, opts = {}) {
-    const inst = AKO.getInstructor(course.instructorId);
+    const inst = AKO.getInstructor(course.instructorId) || { name: 'Eğitmen' };
     const isFav = Storage.isFavorite(course.id);
-    const discount = course.discount || Math.round((1 - course.price / course.oldPrice) * 100);
+    const discount = course.discount || (course.oldPrice ? Math.round((1 - course.price / course.oldPrice) * 100) : 0);
     return `<div class="course-card" data-id="${course.id}">
       <div class="course-card-img-wrap">
         <img src="${course.image}" alt="${course.title}" loading="lazy" class="course-card-img">
@@ -48,7 +48,7 @@ const Components = {
     const role = Storage.getRole();
     const cartCount = Storage.getCart().length;
     const lang = Storage.getLang();
-    const t = AKO.i18n[lang];
+    const t = (AKO.i18n && AKO.i18n[lang]) || AKO.i18n.tr;
     return `<header class="ako-header">
       <div class="container-fluid px-lg-4">
         <nav class="navbar navbar-expand-lg">
@@ -77,7 +77,7 @@ const Components = {
                 <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item lang-opt" data-lang="tr" href="#">🇹🇷 Türkçe</a></li><li><a class="dropdown-item lang-opt" data-lang="en" href="#">🇬🇧 English</a></li></ul>
               </li>
               ${user ? `<li class="nav-item dropdown">
-                <button class="nav-profile-btn" data-bs-toggle="dropdown"><span class="avatar">${user.avatar || user.name[0]}</span></button>
+                <button class="nav-profile-btn" data-bs-toggle="dropdown"><span class="avatar">${user.avatar || (user.name || 'U')[0]}</span></button>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><span class="dropdown-header">${user.name}</span></li>
                   <li><a class="dropdown-item" href="#/dashboard"><i class="fa-solid fa-gauge me-2"></i>Panel</a></li>

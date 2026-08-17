@@ -77,16 +77,17 @@ const App = {
   afterRender(params) {
     this.bindGlobalEvents();
     this.updateCartBadge();
-    const hash = window.location.hash.slice(1);
-    if (hash.startsWith('/player/')) this.initPlayer(params || {});
-    if (hash.startsWith('/checkout')) this.initCheckout();
-    if (hash.startsWith('/quiz/')) this.initQuiz(params);
-    if (hash.includes('/instructor/create')) this.initWizard();
-    if (hash === '/admin' || hash.startsWith('/admin')) this.initAdminCharts();
-    if (hash === '/instructor' || hash === '/instructor/earnings') this.initInstructorCharts();
-    if (hash.startsWith('/live/') && !hash.includes('sessions')) this.initLiveRoom();
-    this.initPromoStrip();
-    this.initSkeleton();
+    const hash = (window.location.hash || '').slice(1);
+    try {
+      if (hash.startsWith('/player/')) this.initPlayer(params || {});
+      if (hash.startsWith('/checkout')) this.initCheckout();
+      if (hash.startsWith('/quiz/')) this.initQuiz(params);
+      if (hash.includes('/instructor/create')) this.initWizard();
+      if (hash === '/admin' || hash.startsWith('/admin')) this.initAdminCharts();
+      if (hash === '/instructor' || hash === '/instructor/earnings') this.initInstructorCharts();
+      if (hash.startsWith('/live/') && !hash.includes('sessions')) this.initLiveRoom();
+      this.initPromoStrip();
+    } catch (e) { console.error(e); }
   },
 
   bindGlobalEvents() {
@@ -116,12 +117,30 @@ const App = {
       });
     });
     // Header buttons
-    const btnCart = document.getElementById('btnCart');
+    const toggler = document.querySelector('.ako-header .navbar-toggler');
+    if (toggler) {
+      toggler.addEventListener('click', e => {
+        const menu = document.getElementById('navMain');
+        if (!menu) return;
+        if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) return;
+        e.preventDefault();
+        menu.classList.toggle('show');
+        toggler.setAttribute('aria-expanded', menu.classList.contains('show') ? 'true' : 'false');
+      });
+    }
     if (btnCart) btnCart.addEventListener('click', () => {
-      document.getElementById('cartDrawer')?.classList.contains('show') ? bootstrap.Offcanvas.getInstance(document.getElementById('cartDrawer'))?.hide() : new bootstrap.Offcanvas(document.getElementById('cartDrawer')).show();
+      const el = document.getElementById('cartDrawer');
+      if (!el || typeof bootstrap === 'undefined') { Router.navigate('/checkout'); return; }
+      const inst = bootstrap.Offcanvas.getInstance(el);
+      inst ? inst.toggle() : new bootstrap.Offcanvas(el).show();
     });
     const btnNotif = document.getElementById('btnNotif');
-    if (btnNotif) btnNotif.addEventListener('click', () => new bootstrap.Offcanvas(document.getElementById('notifDrawer')).show());
+    if (btnNotif) btnNotif.addEventListener('click', () => {
+      const el = document.getElementById('notifDrawer');
+      if (!el || typeof bootstrap === 'undefined') return;
+      const inst = bootstrap.Offcanvas.getInstance(el);
+      inst ? inst.toggle() : new bootstrap.Offcanvas(el).show();
+    });
     const btnTheme = document.getElementById('btnTheme');
     if (btnTheme) btnTheme.addEventListener('click', () => {
       const t = Storage.getTheme() === 'dark' ? 'light' : 'dark';

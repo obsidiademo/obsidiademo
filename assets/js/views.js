@@ -15,7 +15,7 @@ const Views = {
   },
 
   error(msg) {
-    return this.layout(`<div class="error-page"><div class="error-code"><i class="fa-solid fa-wifi"></i></div><h1>Bağlantı Hatası</h1><p>${msg}</p><button class="btn btn-primary" onclick="location.reload()">Yeniden Dene</button></div>`);
+    return this.layout(`<div class="error-page"><div class="error-code">!</div><h1>Bir sorun oluştu</h1><p>${msg || 'Sayfa görüntülenemedi.'}</p><div class="d-flex gap-2 justify-content-center flex-wrap"><a href="#/" class="btn btn-primary">Ana Sayfaya Dön</a><button class="btn btn-outline-primary" onclick="location.reload()">Yeniden Dene</button></div></div>`);
   },
 
   home() {
