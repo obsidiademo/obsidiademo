@@ -8,6 +8,18 @@ ErrorDocument 500 /gonul/500.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /gonul/
+
+  # Serve existing files and directories directly.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Allow extensionless routes such as /gonul/admin -> /gonul/admin.html.
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^/]+)/?$ $1.html [L]
+
+  # Fallback root of subdirectory to index page.
+  RewriteRule ^$ index.html [L]
 </IfModule>
 
 <IfModule mod_expires.c>
@@ -21,3 +33,8 @@ ErrorDocument 500 /gonul/500.html
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript
 </IfModule>
+
+# Protect sensitive files and VCS metadata if present.
+<FilesMatch "^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
+  Require all denied
+</FilesMatch>
