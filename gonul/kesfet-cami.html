@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cami Mimarisi – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li><li><a href="kesfet.html" class="active">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li><li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html">Rota Planlayıcı</a></li><li><a href="dijital-arsiv.html">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html">Ülkeler</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions"><a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a><a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><a href="kesfet.html">Keşfet</a><span>/</span><span>Cami Mimarisi</span></div>
+    <h1>🕌 Cami Mimarisi</h1>
+    <p>Selimiye'den Sultan Ahmed'e, dünya genelinde 340+ İslam cami mimarisi örneği</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Tümü</button>
+      <button class="filter-tab" data-filter="turkiye">🇹🇷 Türkiye</button>
+      <button class="filter-tab" data-filter="orta-dogu">🌙 Orta Doğu</button>
+      <button class="filter-tab" data-filter="orta-asya">🏔️ Orta Asya</button>
+      <button class="filter-tab" data-filter="avrupa">🌍 Avrupa</button>
+    </div>
+    <div class="cards-grid cards-grid-3" id="filteredContent">
+      <a href="mekan-detay.html" class="card" data-category="turkiye" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5a2d00,#c8860a);">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Türkiye – Edirne</span>
+          <h3 class="card-title">Selimiye Camii</h3>
+          <p class="card-desc">Mimar Sinan'ın kendi eserleri arasında "ustalık eserim" dediği şaheser. UNESCO Dünya Mirası.</p>
+          <div class="card-meta"><span>📅 1575</span><span>⭐ 4.9</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span><span class="badge badge-gold">UNESCO</span></div>
+      </a>
+      <a href="mekan-detay.html" class="card" data-category="turkiye" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a3a5c,#4a90d9);">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Türkiye – İstanbul</span>
+          <h3 class="card-title">Sultan Ahmed Camii</h3>
+          <p class="card-desc">Altı minaresiyle ünlü Sultanahmet Camii, İstanbul'un simgesi ve dünya turizm merkezi.</p>
+          <div class="card-meta"><span>📅 1616</span><span>⭐ 4.8</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </a>
+      <a href="mekan-detay.html" class="card" data-category="turkiye" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d5a27,#45a049);">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Türkiye – İstanbul</span>
+          <h3 class="card-title">Süleymaniye Camii</h3>
+          <p class="card-desc">Mimar Sinan'ın Kanuni Sultan Süleyman için inşa ettiği görkemli külliye.</p>
+          <div class="card-meta"><span>📅 1558</span><span>⭐ 4.9</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </a>
+      <a href="mekan-detay.html" class="card" data-category="orta-dogu" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#7c3f00,#d4af37);">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Ürdün – Kudüs</span>
+          <h3 class="card-title">Mescid-i Aksa</h3>
+          <p class="card-desc">İslam'ın üçüncü kutsal mescidi ve Müslümanlar için derin anlam taşıyan tarihi mekân.</p>
+          <div class="card-meta"><span>📅 705</span><span>⭐ 5.0</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span><span class="badge badge-primary">Kutsal</span></div>
+      </a>
+      <a href="mekan-detay.html" class="card" data-category="orta-asya" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a4a6b,#3498db);">🔵</div>
+        <div class="card-body">
+          <span class="card-tag">Özbekistan – Semerkand</span>
+          <h3 class="card-title">Bibi Hanım Camii</h3>
+          <p class="card-desc">Timur'un yaptırdığı devasa cami, Orta Asya İslam mimarisinin zirvesi.</p>
+          <div class="card-meta"><span>📅 1404</span><span>⭐ 4.7</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </a>
+      <a href="mekan-detay.html" class="card" data-category="avrupa" style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6b2d5a,#c0392b);">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Bosna – Saraybosna</span>
+          <h3 class="card-title">Gazi Hüsrev Bey Camii</h3>
+          <p class="card-desc">Balkanlar'daki en önemli Osmanlı camisinin başında gelen tarihi yapı.</p>
+          <div class="card-meta"><span>📅 1531</span><span>⭐ 4.6</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </a>
+    </div>
+    <div class="text-center mt-4">
+      <a href="kesfet.html" class="btn btn-outline">← Tüm Kategoriler</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div></div></footer>
+<script src="assets/js/main.js"></script>
+</body></html>

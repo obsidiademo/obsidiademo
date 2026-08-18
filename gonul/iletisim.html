@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İletişim – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li><li><a href="kesfet.html">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li><li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html">Rota Planlayıcı</a></li><li><a href="dijital-arsiv.html">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html">Ülkeler</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions"><a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a><a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><span>İletişim</span></div>
+    <h1>✉️ İletişim</h1>
+    <p>Sorularınız, önerileriniz veya iş birliği teklifleri için bize ulaşın</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+    <div>
+      <h2 style="color:var(--primary);margin-bottom:1.5rem;">Bize Yazın</h2>
+      <form data-validate data-success-msg="Mesajınız alındı! En kısa sürede dönüş yapacağız.">
+        <div class="form-group"><label class="form-label">Adınız Soyadınız</label><input type="text" class="form-control" placeholder="Ad Soyad" required /></div>
+        <div class="form-group"><label class="form-label">E-posta</label><input type="email" class="form-control" placeholder="ornek@email.com" required /></div>
+        <div class="form-group"><label class="form-label">Konu</label>
+          <select class="form-control">
+            <option>Genel Bilgi</option><option>İçerik Katkısı</option><option>Teknik Destek</option>
+            <option>İş Birliği</option><option>Medya / Basın</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Mesajınız</label><textarea class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea></div>
+        <button type="submit" class="btn btn-primary">📨 Gönder</button>
+      </form>
+    </div>
+    <div>
+      <h2 style="color:var(--primary);margin-bottom:1.5rem;">İletişim Bilgileri</h2>
+      <div class="sidebar-card" style="margin-bottom:1rem;">
+        <h4>📧 E-posta</h4>
+        <p><a href="mailto:info@gonulbaglari.com" style="color:var(--primary);">info@gonulbaglari.com</a></p>
+      </div>
+      <div class="sidebar-card" style="margin-bottom:1rem;">
+        <h4>🏛️ Adres</h4>
+        <p>Cağaloğlu Mah., Babıali Cd. No:12<br />Fatih, İstanbul 34120</p>
+      </div>
+      <div class="sidebar-card" style="margin-bottom:1rem;">
+        <h4>⏰ Çalışma Saatleri</h4>
+        <p>Pazartesi – Cuma: 09:00 – 18:00<br />Hafta sonu: Kapalı</p>
+      </div>
+      <div class="sidebar-card">
+        <h4>🌐 Sosyal Medya</h4>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="#" class="btn btn-secondary btn-sm">𝕏 Twitter</a>
+          <a href="#" class="btn btn-secondary btn-sm">📸 Instagram</a>
+          <a href="#" class="btn btn-secondary btn-sm">▶ YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div></div></footer>
+<script src="assets/js/main.js"></script>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ülkeler – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li><li><a href="kesfet.html">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li><li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html">Rota Planlayıcı</a></li><li><a href="dijital-arsiv.html">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html" class="active">Ülkeler</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions"><a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a><a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><span>Ülkeler</span></div>
+    <h1>🌍 Ülkeler</h1>
+    <p>48 ülkede İslam medeniyetinin izlerini keşfedin</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="search-bar">
+      <input type="text" placeholder="Ülke ara..." id="ulkeSearch" />
+      <button onclick="searchUlke()">🔍 Ara</button>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Tümü</button>
+      <button class="filter-tab" data-filter="anadolu">🇹🇷 Anadolu</button>
+      <button class="filter-tab" data-filter="orta-dogu">🌙 Orta Doğu</button>
+      <button class="filter-tab" data-filter="orta-asya">🏔️ Orta Asya</button>
+      <button class="filter-tab" data-filter="balkan">🌍 Balkanlar</button>
+      <button class="filter-tab" data-filter="kuzey-afrika">☀️ Kuzey Afrika</button>
+    </div>
+    <div class="cards-grid cards-grid-4" id="filteredContent">
+      <a href="ulke-turkiye.html" class="card" data-category="anadolu" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇹🇷</div>
+          <h4 class="card-title">Türkiye</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">420+ mekân</p>
+          <span class="badge badge-primary">Popüler</span>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-dogu" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇸🇦</div>
+          <h4 class="card-title">Suudi Arabistan</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">95+ mekân</p>
+          <span class="badge badge-gold">Kutsal</span>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-asya" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇺🇿</div>
+          <h4 class="card-title">Özbekistan</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">210+ mekân</p>
+          <span class="badge badge-info">Timurlu</span>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="balkan" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇧🇦</div>
+          <h4 class="card-title">Bosna-Hersek</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">145+ mekân</p>
+          <span class="badge badge-success">Osmanlı</span>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-dogu" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇮🇷</div>
+          <h4 class="card-title">İran</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">185+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="kuzey-afrika" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇲🇦</div>
+          <h4 class="card-title">Fas</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">165+ mekân</p>
+          <span class="badge badge-gold">Endülüs</span>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-dogu" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇪🇬</div>
+          <h4 class="card-title">Mısır</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">220+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-asya" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇹🇯</div>
+          <h4 class="card-title">Tacikistan</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">48+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="balkan" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇦🇱</div>
+          <h4 class="card-title">Arnavutluk</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">62+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="balkan" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇽🇰</div>
+          <h4 class="card-title">Kosova</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">38+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-asya" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇰🇿</div>
+          <h4 class="card-title">Kazakistan</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">72+ mekân</p>
+        </div>
+      </a>
+      <a href="ulke-detay.html" class="card" data-category="orta-dogu" style="text-decoration:none;text-align:center;">
+        <div class="card-body">
+          <div style="font-size:2.8rem;margin-bottom:0.6rem;">🇮🇶</div>
+          <h4 class="card-title">Irak</h4>
+          <p class="card-desc" style="font-size:0.82rem;margin-bottom:0.5rem;">110+ mekân</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div></div></footer>
+<script src="assets/js/main.js"></script>
+<script>
+function searchUlke(){
+  const q = document.getElementById('ulkeSearch').value.trim().toLowerCase();
+  document.querySelectorAll('#filteredContent .card').forEach(el=>{
+    el.style.display = (!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+}
+document.getElementById('ulkeSearch').addEventListener('keydown',e=>{if(e.key==='Enter')searchUlke();});
+</script>
+</body></html>
