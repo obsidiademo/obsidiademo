@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rota Planlayıcı – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li><li><a href="kesfet.html">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li><li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html" class="active">Rota Planlayıcı</a></li><li><a href="dijital-arsiv.html">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html">Ülkeler</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions"><a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a><a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><span>Rota Planlayıcı</span></div>
+    <h1>🧭 Rota Planlayıcı</h1>
+    <p>Kişisel kültür turlarınızı planlayın, paylaşın ve yol arkadaşları bulun</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <!-- Yeni Rota Oluştur -->
+    <div style="background:var(--white);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow);margin-bottom:3rem;">
+      <h3 style="color:var(--primary);margin-bottom:1.5rem;">➕ Yeni Rota Oluştur</h3>
+      <form data-validate data-success-msg="Rotanız başarıyla oluşturuldu!">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Rota Adı</label>
+            <input type="text" class="form-control" placeholder="Örn: Anadolu Cami Rotası" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Başlangıç Şehri</label>
+            <input type="text" class="form-control" placeholder="Örn: İstanbul" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Bitiş Şehri</label>
+            <input type="text" class="form-control" placeholder="Örn: Konya" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Süre (Gün)</label>
+            <select class="form-control">
+              <option>1 Gün</option><option>2-3 Gün</option><option>4-7 Gün</option><option>1-2 Hafta</option><option>2+ Hafta</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kategori</label>
+          <select class="form-control">
+            <option>Cami Mimarisi</option><option>Osmanlı Tarihi</option><option>Tasavvuf Geleneği</option>
+            <option>Selçuklu Mimarisi</option><option>Karma / Genel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Açıklama</label>
+          <textarea class="form-control" placeholder="Rotanız hakkında kısa bir açıklama yazın..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">🗺️ Rota Oluştur</button>
+      </form>
+    </div>
+
+    <!-- Popüler Rotalar -->
+    <div class="section-header">
+      <span class="section-tag">Keşfet</span>
+      <h2>Popüler Rotalar</h2>
+      <p>Topluluk üyelerinin en çok tercih ettiği kültür rotaları</p>
+    </div>
+    <div class="cards-grid cards-grid-3">
+      <a href="rota-detay.html" class="card" style="text-decoration:none;">
+        <div class="card-img" style="font-size:3rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary),var(--accent));">🗺️</div>
+        <div class="card-body">
+          <span class="card-tag">Osmanlı</span>
+          <h3 class="card-title">İstanbul Osmanlı Mirası</h3>
+          <p class="card-desc">Topkapı'dan Sultanahmet'e, Kapalıçarşı'dan Süleymaniye'ye İstanbul'un Osmanlı katmanları.</p>
+          <div class="card-meta"><span>📍 8 mekân</span><span>⏱️ 3 Gün</span><span>👥 124 katılım</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Rotaya Katıl →</span><span class="badge badge-primary">Popüler</span></div>
+      </a>
+      <a href="rota-detay.html" class="card" style="text-decoration:none;">
+        <div class="card-img" style="font-size:3rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d5a27,#45a049);">🌹</div>
+        <div class="card-body">
+          <span class="card-tag">Tasavvuf</span>
+          <h3 class="card-title">Anadolu Tasavvuf Rotası</h3>
+          <p class="card-desc">Konya Mevlana'dan Eskişehir Yunus Emre'ye Anadolu'nun manevi coğrafyası.</p>
+          <div class="card-meta"><span>📍 6 mekân</span><span>⏱️ 4 Gün</span><span>👥 87 katılım</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Rotaya Katıl →</span></div>
+      </a>
+      <a href="rota-detay.html" class="card" style="text-decoration:none;">
+        <div class="card-img" style="font-size:3rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a4a6b,#3498db);">🔵</div>
+        <div class="card-body">
+          <span class="card-tag">Orta Asya</span>
+          <h3 class="card-title">İpek Yolu Kültür Turu</h3>
+          <p class="card-desc">Semerkand, Buhara ve Hive'nin lacivert kubbeli Timurlu mirasını keşfetme rotası.</p>
+          <div class="card-meta"><span>📍 12 mekân</span><span>⏱️ 10 Gün</span><span>👥 56 katılım</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Rotaya Katıl →</span><span class="badge badge-gold">Önerilen</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div></div></footer>
+<script src="assets/js/main.js"></script>
+</body></html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dijital Arşiv – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li><li><a href="kesfet.html">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li><li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html">Rota Planlayıcı</a></li><li><a href="dijital-arsiv.html" class="active">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html">Ülkeler</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions"><a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a><a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><span>Dijital Arşiv</span></div>
+    <h1>📚 Dijital Arşiv</h1>
+    <p>El yazmaları, tarihi fotoğraflar ve kültürel belgelerin dijital koleksiyonu</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="stats-grid" style="margin-bottom:3rem;">
+      <div class="stat-card"><div class="stat-icon">📄</div><div class="stat-num">2.460</div><div class="stat-label">Belge</div></div>
+      <div class="stat-card"><div class="stat-icon">🖼️</div><div class="stat-num">8.240</div><div class="stat-label">Fotoğraf</div></div>
+      <div class="stat-card"><div class="stat-icon">📜</div><div class="stat-num">340</div><div class="stat-label">El Yazması</div></div>
+      <div class="stat-card"><div class="stat-icon">🎙️</div><div class="stat-num">124</div><div class="stat-label">Sözlü Tarih</div></div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Arşivde ara: yazar, dönem, konu..." />
+      <button>🔍 Ara</button>
+    </div>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Tümü</button>
+      <button class="filter-tab" data-filter="elyazma">📜 El Yazmaları</button>
+      <button class="filter-tab" data-filter="fotograf">🖼️ Fotoğraflar</button>
+      <button class="filter-tab" data-filter="belge">📄 Belgeler</button>
+      <button class="filter-tab" data-filter="sozlü">🎙️ Sözlü Tarih</button>
+    </div>
+
+    <div class="cards-grid cards-grid-3" id="filteredContent">
+      <div class="card" data-category="elyazma">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5a2d00,#c8860a);">📜</div>
+        <div class="card-body">
+          <span class="card-tag">El Yazması – 16. yy</span>
+          <h3 class="card-title">Kanuni Dönemi Hat Koleksiyonu</h3>
+          <p class="card-desc">Süleymaniye Kütüphanesi arşivinden 16. yüzyıla ait hat sanatı örnekleri.</p>
+          <div class="card-meta"><span>📅 1550–1565</span><span>🌍 Osmanlı</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span><span class="badge badge-gold">Nadir</span></div>
+      </div>
+      <div class="card" data-category="fotograf">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2a2a2a,#6a6a6a);">📷</div>
+        <div class="card-body">
+          <span class="card-tag">Fotoğraf – 1905</span>
+          <h3 class="card-title">İstanbul Camilerinden Tarihi Fotoğraflar</h3>
+          <p class="card-desc">Erken 20. yüzyıldan İstanbul'un tarihi camilerini belgeleyen siyah-beyaz koleksiyon.</p>
+          <div class="card-meta"><span>📅 1900–1920</span><span>📍 İstanbul</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </div>
+      <div class="card" data-category="belge">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a3a5c,#4a90d9);">📄</div>
+        <div class="card-body">
+          <span class="card-tag">Belge – 18. yy</span>
+          <h3 class="card-title">Osmanlı Vakıf Kayıtları</h3>
+          <p class="card-desc">18. yüzyıl Osmanlı vakıf kurumlarına ait resmi belgeler ve fermanlar.</p>
+          <div class="card-meta"><span>📅 1750–1800</span><span>🌍 Osmanlı İmparatorluğu</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </div>
+      <div class="card" data-category="elyazma">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d5a27,#45a049);">🌿</div>
+        <div class="card-body">
+          <span class="card-tag">El Yazması – 13. yy</span>
+          <h3 class="card-title">Mevlana'nın Mesnevi Nüshası</h3>
+          <p class="card-desc">Konya Mevlana Müzesi koleksiyonundan 13. yüzyıl Mesnevi el yazması sayfaları.</p>
+          <div class="card-meta"><span>📅 1270–1280</span><span>📍 Konya</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span><span class="badge badge-gold">Nadir</span></div>
+      </div>
+      <div class="card" data-category="sozlü">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6b2d5a,#c0392b);">🎙️</div>
+        <div class="card-body">
+          <span class="card-tag">Sözlü Tarih – 2018</span>
+          <h3 class="card-title">Anadolu Ustalarından Anlatılar</h3>
+          <p class="card-desc">Geleneksel Türk ahşap ve taş oyma ustalarından derlenen sözlü tarih kayıtları.</p>
+          <div class="card-meta"><span>📅 2018</span><span>⏱️ 4 saat 20 dakika</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Dinle →</span></div>
+      </div>
+      <div class="card" data-category="fotograf">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#4a1a6b,#8b5fbf);">🔵</div>
+        <div class="card-body">
+          <span class="card-tag">Fotoğraf – 1960</span>
+          <h3 class="card-title">Semerkand Sanat Eserleri</h3>
+          <p class="card-desc">1960'larda çekilmiş Özbekistan Semerkand'ın Timurlu yapılarına ait fotoğraf arşivi.</p>
+          <div class="card-meta"><span>📅 1958–1965</span><span>📍 Semerkand</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">İncele →</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div></div></footer>
+<script src="assets/js/main.js"></script>
+</body></html>

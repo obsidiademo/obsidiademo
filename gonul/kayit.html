@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Üye Ol – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-box" style="max-width:500px;">
+    <div class="auth-logo">
+      <div class="logo-icon">💚</div>
+      <h2>Gönül Bağları'na Katıl</h2>
+      <p>Ücretsiz hesap oluşturun</p>
+    </div>
+    <form data-validate data-success-msg="Kayıt başarılı! Hoş geldiniz!">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ad</label>
+          <input type="text" class="form-control" placeholder="Adınız" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Soyad</label>
+          <input type="text" class="form-control" placeholder="Soyadınız" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-posta Adresi</label>
+        <input type="email" class="form-control" placeholder="ornek@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Şifre</label>
+        <input type="password" class="form-control" placeholder="En az 8 karakter" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Şehir / Ülke</label>
+        <input type="text" class="form-control" placeholder="Örn: İstanbul, Türkiye" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">İlgi Alanları</label>
+        <select class="form-control">
+          <option value="">Seçin (isteğe bağlı)</option>
+          <option>Cami Mimarisi</option>
+          <option>Osmanlı Tarihi</option>
+          <option>Tasavvuf</option>
+          <option>Selçuklu Mimarisi</option>
+          <option>Orta Asya Kültürü</option>
+          <option>Tüm Alanlar</option>
+        </select>
+      </div>
+      <div style="margin-bottom:1.25rem;font-size:0.88rem;">
+        <label style="display:flex;align-items:flex-start;gap:0.5rem;cursor:pointer;">
+          <input type="checkbox" required style="margin-top:2px;" />
+          <span><a href="#" style="color:var(--primary);font-weight:700;">Kullanım Koşulları</a> ve <a href="#" style="color:var(--primary);font-weight:700;">Gizlilik Politikası</a>'nı kabul ediyorum.</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Hesap Oluştur</button>
+    </form>
+    <div class="auth-footer">
+      Zaten üye misiniz? <a href="giris.html">Giriş Yapın</a>
+    </div>
+    <div class="auth-footer" style="margin-top:0.75rem;">
+      <a href="index.html" style="color:var(--text-light);">← Anasayfaya Dön</a>
+    </div>
+  </div>
+</div>
+<script src="assets/js/main.js"></script>
+</body></html>

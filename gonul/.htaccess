@@ -1,0 +1,40 @@
+# Gönül Bağları - Apache htaccess
+Options -Indexes
+
+ErrorDocument 403 /gonul/403.html
+ErrorDocument 404 /gonul/404.html
+ErrorDocument 500 /gonul/500.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /gonul/
+
+  # Serve existing files and directories directly.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Allow extensionless routes such as /gonul/admin -> /gonul/admin.html.
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^/]+)/?$ $1.html [L]
+
+  # Fallback root of subdirectory to index page.
+  RewriteRule ^$ index.html [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript
+</IfModule>
+
+# Protect sensitive files and VCS metadata if present.
+<FilesMatch "^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
+  Require all denied
+</FilesMatch>

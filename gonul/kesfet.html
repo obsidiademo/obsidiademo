@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keşfet – Gönül Bağları</title>
+  <meta name="description" content="İslam medeniyetinin tüm katmanlarını keşfedin: camiler, Osmanlı eserleri, tasavvuf, Selçuklu ve daha fazlası." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><span class="logo-icon">🕌</span><span>Gönül Bağları</span></a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">Anasayfa</a></li>
+    <li><a href="kesfet.html" class="active">Keşfet</a></li>
+    <li><a href="gonul-baglari.html">Gönül Bağları</a></li>
+    <li><a href="miras-haritasi.html">Miras Haritası</a></li>
+    <li><a href="rota-planlayici.html">Rota Planlayıcı</a></li>
+    <li><a href="dijital-arsiv.html">Dijital Arşiv</a></li>
+    <li><a href="ulkeler.html">Ülkeler</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="giris.html" class="btn-nav btn-nav-outline">Giriş Yap</a>
+    <a href="kayit.html" class="btn-nav btn-nav-fill">Üye Ol</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a><span>/</span><span>Keşfet</span></div>
+    <h1>🧭 Keşfet</h1>
+    <p>İslam medeniyetinin zengin katmanlarını filtreleyin, arayın ve keşfedin</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="search-bar">
+      <input type="text" placeholder="Mekân, şehir veya kültür adı ara..." id="mainSearch" />
+      <button onclick="doSearch()">🔍 Ara</button>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Tümü</button>
+      <button class="filter-tab" data-filter="cami">🕌 Cami</button>
+      <button class="filter-tab" data-filter="osmanli">👑 Osmanlı</button>
+      <button class="filter-tab" data-filter="tasavvuf">🌹 Tasavvuf</button>
+      <button class="filter-tab" data-filter="selcuklu">🏛️ Selçuklu</button>
+      <button class="filter-tab" data-filter="ozbek">🔵 Özbek</button>
+    </div>
+    <div class="cards-grid cards-grid-3" id="filteredContent" id="searchResults">
+      <a href="kesfet-cami.html" class="card" data-category="cami" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">🕌</div>
+        <div class="card-body">
+          <span class="card-tag">Cami</span>
+          <h3 class="card-title">Cami Mimarisi</h3>
+          <p class="card-desc">Dünyanın dört bir yanındaki İslam cami mimarisinin örnekleri.</p>
+          <div class="card-meta"><span>🏛️ 340+ mekân</span><span>🌍 38 ülke</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Kategoriye Git →</span><span class="badge badge-primary">Popüler</span></div>
+      </a>
+      <a href="kesfet-osmanli.html" class="card" data-category="osmanli" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">👑</div>
+        <div class="card-body">
+          <span class="card-tag">Osmanlı</span>
+          <h3 class="card-title">Osmanlı Mirası</h3>
+          <p class="card-desc">Altı asır boyunca üç kıtaya yayılan Osmanlı medeniyetinin eserleri.</p>
+          <div class="card-meta"><span>📜 280+ eser</span><span>🌍 28 ülke</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Kategoriye Git →</span></div>
+      </a>
+      <a href="kesfet-tasavvuf.html" class="card" data-category="tasavvuf" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">🌹</div>
+        <div class="card-body">
+          <span class="card-tag">Tasavvuf</span>
+          <h3 class="card-title">Tasavvuf Geleneği</h3>
+          <p class="card-desc">Mevlana'dan Yunus Emre'ye tekke ve zaviyelerin manevi dünyası.</p>
+          <div class="card-meta"><span>🌿 120+ mekân</span><span>📚 45 tarikat</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Kategoriye Git →</span></div>
+      </a>
+      <a href="kesfet-selcuklu.html" class="card" data-category="selcuklu" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">🏛️</div>
+        <div class="card-body">
+          <span class="card-tag">Selçuklu</span>
+          <h3 class="card-title">Selçuklu Mimarisi</h3>
+          <p class="card-desc">Anadolu'nun kalbindeki taş işçiliği ve Selçuklu yapı sanatı.</p>
+          <div class="card-meta"><span>🏛️ 160+ yapı</span><span>🗺️ 8 ülke</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Kategoriye Git →</span></div>
+      </a>
+      <a href="kesfet-ozbek.html" class="card" data-category="ozbek" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">🔵</div>
+        <div class="card-body">
+          <span class="card-tag">Özbek</span>
+          <h3 class="card-title">Özbek Kültürü</h3>
+          <p class="card-desc">Semerkand ve Buhara'nın lacivert kubbeli mirasından sanat eserleri.</p>
+          <div class="card-meta"><span>💎 90+ eser</span><span>🌏 5 ülke</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Kategoriye Git →</span></div>
+      </a>
+      <a href="dijital-arsiv.html" class="card" data-category="arsiv" data-searchable style="text-decoration:none;">
+        <div class="card-img" style="font-size:4rem;display:flex;align-items:center;justify-content:center;">📚</div>
+        <div class="card-body">
+          <span class="card-tag">Arşiv</span>
+          <h3 class="card-title">Dijital Arşiv</h3>
+          <p class="card-desc">El yazmaları, tarihi fotoğraflar ve kültürel kayıtların dijital koleksiyonu.</p>
+          <div class="card-meta"><span>📄 2.400+ belge</span><span>🖼️ 8.000+ fotoğraf</span></div>
+        </div>
+        <div class="card-footer"><span class="card-link">Arşive Git →</span><span class="badge badge-gold">Yeni</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-inner">
+  <div class="footer-bottom"><span>© 2025 Gönül Bağları</span><a href="index.html">Anasayfaya Dön</a></div>
+</div></footer>
+<script src="assets/js/main.js"></script>
+<script>
+function doSearch(){
+  const q = document.getElementById('mainSearch').value.trim().toLowerCase();
+  document.querySelectorAll('[data-searchable]').forEach(el=>{
+    el.style.display = (!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+}
+document.getElementById('mainSearch').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
+</script>
+</body></html>

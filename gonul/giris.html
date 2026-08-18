@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="logo-icon">🕌</div>
+      <h2>Gönül Bağları</h2>
+      <p>Hesabınıza giriş yapın</p>
+    </div>
+    <form data-validate data-success-msg="Giriş başarılı! Yönlendiriliyorsunuz...">
+      <div class="form-group">
+        <label class="form-label">E-posta Adresi</label>
+        <input type="email" class="form-control" placeholder="ornek@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Şifre</label>
+        <input type="password" class="form-control" placeholder="••••••••" required />
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;font-size:0.88rem;">
+        <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
+          <input type="checkbox" /> Beni hatırla
+        </label>
+        <a href="sifremi-unuttum.html" style="color:var(--primary);font-weight:700;">Şifremi Unuttum</a>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+    </form>
+    <div class="auth-divider"><span>veya</span></div>
+    <div class="auth-footer">
+      Hesabınız yok mu? <a href="kayit.html">Ücretsiz Kayıt Ol</a>
+    </div>
+    <div class="auth-footer" style="margin-top:0.75rem;">
+      <a href="index.html" style="color:var(--text-light);">← Anasayfaya Dön</a>
+    </div>
+  </div>
+</div>
+<script src="assets/js/main.js"></script>
+</body></html>
