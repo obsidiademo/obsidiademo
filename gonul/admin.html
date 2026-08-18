@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Gönül Bağları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">🕌 Gönül Bağları</div>
+    <nav class="admin-nav">
+      <a href="admin.html" class="active"><span class="nav-icon">📊</span> Dashboard</a>
+      <a href="#"><span class="nav-icon">🕌</span> Mekânlar</a>
+      <a href="#"><span class="nav-icon">👥</span> Üyeler</a>
+      <a href="#"><span class="nav-icon">🗺️</span> Rotalar</a>
+      <a href="#"><span class="nav-icon">📚</span> Arşiv</a>
+      <a href="#"><span class="nav-icon">💬</span> Yorumlar</a>
+      <a href="#"><span class="nav-icon">⚙️</span> Ayarlar</a>
+      <a href="index.html" style="margin-top:2rem;border-top:1px solid rgba(255,255,255,0.15);padding-top:1rem;"><span class="nav-icon">🏠</span> Siteye Dön</a>
+    </nav>
+  </aside>
+  <main class="admin-content">
+    <div class="admin-topbar">
+      <h2 class="admin-title">📊 Dashboard</h2>
+      <div style="display:flex;align-items:center;gap:1rem;font-size:0.9rem;">
+        <span style="color:var(--text-light);">Son güncelleme: Bugün 14:32</span>
+        <span class="badge badge-success">Sistem Aktif</span>
+      </div>
+    </div>
+
+    <div class="admin-cards-grid">
+      <div class="admin-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div class="admin-card-num">1.247</div><div class="admin-card-label">Toplam Mekân</div></div>
+          <span style="font-size:2rem;">🕌</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-light);margin-top:0.5rem;">+12 bu ay</div>
+      </div>
+      <div class="admin-card" style="border-left-color:var(--accent);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div class="admin-card-num" style="color:var(--accent);">5.824</div><div class="admin-card-label">Aktif Üye</div></div>
+          <span style="font-size:2rem;">👥</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-light);margin-top:0.5rem;">+87 bu hafta</div>
+      </div>
+      <div class="admin-card" style="border-left-color:#2d7a4f;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div class="admin-card-num" style="color:#2d7a4f;">342</div><div class="admin-card-label">Oluşturulan Rota</div></div>
+          <span style="font-size:2rem;">🗺️</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-light);margin-top:0.5rem;">+18 bu ay</div>
+      </div>
+      <div class="admin-card" style="border-left-color:#1a6b8a;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div class="admin-card-num" style="color:#1a6b8a;">2.460</div><div class="admin-card-label">Arşiv Belgesi</div></div>
+          <span style="font-size:2rem;">📚</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-light);margin-top:0.5rem;">+34 bu ay</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:2rem;">
+      <h3 style="color:var(--primary);margin-bottom:1rem;">Son Eklenen Mekânlar</h3>
+      <table class="data-table">
+        <thead><tr><th>Mekân Adı</th><th>Şehir</th><th>Kategori</th><th>Eklenme Tarihi</th><th>Durum</th></tr></thead>
+        <tbody>
+          <tr><td>Selimiye Camii</td><td>Edirne</td><td>Cami Mimarisi</td><td>2025-01-15</td><td><span class="badge badge-success">Aktif</span></td></tr>
+          <tr><td>Bibi Hanım Camii</td><td>Semerkand</td><td>Orta Asya</td><td>2025-01-12</td><td><span class="badge badge-success">Aktif</span></td></tr>
+          <tr><td>Gazi Hüsrev Bey Camii</td><td>Saraybosna</td><td>Osmanlı</td><td>2025-01-10</td><td><span class="badge badge-success">Aktif</span></td></tr>
+          <tr><td>İnce Minareli Medrese</td><td>Konya</td><td>Selçuklu</td><td>2025-01-08</td><td><span class="badge badge-info">İnceleniyor</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h3 style="color:var(--primary);margin-bottom:1rem;">Son Kayıt Olan Üyeler</h3>
+      <table class="data-table">
+        <thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Şehir</th><th>Kayıt Tarihi</th></tr></thead>
+        <tbody>
+          <tr><td>Ahmet Yılmaz</td><td>ahmet@email.com</td><td>İstanbul</td><td>2025-01-15</td></tr>
+          <tr><td>Fatma Demir</td><td>fatma@email.com</td><td>Saraybosna</td><td>2025-01-14</td></tr>
+          <tr><td>Zeynep Kaya</td><td>zeynep@email.com</td><td>Konya</td><td>2025-01-13</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<script src="assets/js/main.js"></script>
+</body></html>
