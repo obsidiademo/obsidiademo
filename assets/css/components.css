@@ -532,6 +532,17 @@ table.data tr:hover td {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+body[data-layout="auth"] .cookie-banner,
+body[data-layout="pos"] .cookie-banner {
+  bottom: 16px;
+}
+
+body:has(#cookie-banner) .auth-form {
+  padding-bottom: 160px;
 }
 
 .command-palette {

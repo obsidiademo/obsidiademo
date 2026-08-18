@@ -37,10 +37,11 @@ window.Avanta = window.Avanta || {};
       } else if (layout === "user" || layout === "merchant" || layout === "admin") {
         const items = layout === "admin" ? A.Layouts.adminNav : layout === "merchant" ? A.Layouts.merchantNav : A.Layouts.userNav;
         const active = page.replace(/^(user|merchant|admin)-/, "");
-        const crumbs = layout.charAt(0).toUpperCase() + layout.slice(1) + " / " + (document.title.split("|")[0] || page);
+        const titleBit = (document.title.split("|")[0] || "").replace(/^(Admin|Satıcı|Dashboard)\s*\/\s*/i, "").trim();
+        const crumbs = (layout === "admin" ? "Süper Admin" : layout === "merchant" ? "Satıcı" : "Hesabım") + " / " + titleBit;
         root.innerHTML =
           '<div class="panel-shell">' + A.Layouts.sidebar(items, active) +
-          '<div class="panel-main">' + A.Layouts.panelTop() +
+          '<div class="panel-main">' + A.Layouts.panelTop(layout === "admin" ? "Kullanıcı, sipariş, marka, ürün ara..." : "Sipariş, fırsat veya mesaj ara...") +
           '<main class="panel-content"><div class="breadcrumb">' + crumbs + "</div>" + inner + "</main></div></div>" +
           A.Layouts.bottomNav(nav || "profile") + A.Layouts.cookie() + A.Layouts.commandPalette() + A.Layouts.notifDropdown();
       } else {
@@ -53,8 +54,11 @@ window.Avanta = window.Avanta || {};
     bindGlobal: function () {
       document.querySelectorAll("[data-demo-login]").forEach(function (b) {
         b.onclick = function () {
-          document.querySelector('[name="email"]').value = b.getAttribute("data-demo-login");
-          document.querySelector('[name="password"]').value = "123456";
+          const email = b.getAttribute("data-demo-login");
+          const res = A.Services.Auth.login(email, "123456");
+          if (!res.ok) return A.UI.toast(res.error, "error");
+          A.UI.toast("Hoş geldiniz, " + res.user.firstName, "success");
+          location.href = A.Layouts.roleHome(res.user);
         };
       });
       document.querySelectorAll("[data-logout]").forEach(function (b) {
