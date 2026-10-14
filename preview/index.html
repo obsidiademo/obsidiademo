@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EVORA — Ev Gereçleri</title>
+    <meta name="description" content="Premium ev gereçleri: sakin metal, temiz seramik, mutfak atmosferi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="evora-atmosphere">
+    <header class="site-header">
+      <a class="site-logo" href="#">EVORA</a>
+      <nav class="site-nav" aria-label="Ana menü">
+        <a href="#categories">Koleksiyon</a>
+        <a href="#story">Malzeme</a>
+        <a href="#products">Ürünler</a>
+      </nav>
+      <a class="site-cart" href="#products" aria-label="Sepet">Sepet (0)</a>
+    </header>
+
+    <section class="evora-hero" aria-label="EVORA">
+      <div class="evora-hero__media">
+        <img
+          src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=2400&q=80"
+          alt="Aydınlık mutfak tezgahı ve ev gereçleri"
+          width="2400"
+          height="1600"
+          fetchpriority="high"
+        >
+      </div>
+      <div class="evora-hero__veil" aria-hidden="true"></div>
+      <div class="evora-hero__content">
+        <p class="evora-hero__brand">EVORA</p>
+        <h1 class="evora-hero__headline">Ev için seçilmiş gereçler</h1>
+        <p class="evora-hero__support">Sakin metal, temiz seramik ve günlük kullanımı yücelten mutfak atmosferi.</p>
+        <div class="evora-hero__ctas">
+          <a class="evora-btn evora-btn--primary" href="#products">Koleksiyonu keşfet</a>
+          <a class="evora-btn evora-btn--ghost" href="#categories">Mutfak</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="evora-categories" id="categories">
+      <div class="evora-categories__intro">
+        <h2>Ev gereçleri</h2>
+        <p>Mutfak, sofra ve günlük bakım için sade bir seçki.</p>
+      </div>
+      <div class="evora-categories__grid">
+        <a class="evora-category" href="#products">
+          <img src="https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=1200&q=80" alt="Paslanmaz mutfak gereçleri" loading="lazy">
+          <p class="evora-category__label">Mutfak</p>
+        </a>
+        <a class="evora-category" href="#products">
+          <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80" alt="Seramik sofra takımı" loading="lazy">
+          <p class="evora-category__label">Sofra</p>
+        </a>
+        <a class="evora-category" href="#products">
+          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" alt="Temiz banyo ve bakım ürünleri" loading="lazy">
+          <p class="evora-category__label">Bakım</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="evora-story" id="story">
+      <div class="evora-story__media">
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80"
+          alt="Doğal ışıklı modern mutfak"
+          loading="lazy"
+        >
+      </div>
+      <div class="evora-story__copy">
+        <h2>Malzeme konuşsun</h2>
+        <p>Paslanmaz çelik, porselen ve ısıya dayanıklı cam — her parçayı uzun ömür ve sakin bir mutfak ritmi için seçtik.</p>
+        <div>
+          <a class="evora-btn evora-btn--ghost" href="#products">Öne çıkanlar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <div class="products__intro">
+        <h2>Seçilmiş ürünler</h2>
+        <p>Günlük mutfağa sakin bir lüks.</p>
+      </div>
+      <div class="products__grid">
+        <a class="product" href="#">
+          <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=900&q=80" alt="Çelik tencere" loading="lazy">
+          <h3>Çelik tencere</h3>
+          <p>₺1.890</p>
+        </a>
+        <a class="product" href="#">
+          <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" alt="Seramik kâse seti" loading="lazy">
+          <h3>Seramik kâse seti</h3>
+          <p>₺640</p>
+        </a>
+        <a class="product" href="#">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80" alt="Cam sürahi" loading="lazy">
+          <h3>Cam sürahi</h3>
+          <p>₺420</p>
+        </a>
+        <a class="product" href="#">
+          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=900&q=80" alt="Keten mutfak havlusu" loading="lazy">
+          <h3>Keten havlu</h3>
+          <p>₺280</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p class="site-footer__brand">EVORA</p>
+      <p>Premium ev gereçleri — Quicksand tipografi ile yenilenmiş vitrin.</p>
+    </footer>
+  </body>
+</html>

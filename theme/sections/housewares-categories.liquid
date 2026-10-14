@@ -1,0 +1,93 @@
+{{ 'housewares-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="evora-categories" id="EvoraCategories-{{ section.id }}">
+  <div class="evora-categories__intro">
+    {%- if section.settings.heading != blank -%}
+      <h2>{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.support != blank -%}
+      <p>{{ section.settings.support }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="evora-categories__grid">
+    {%- for block in section.blocks -%}
+      <a
+        class="evora-category"
+        href="{{ block.settings.link | default: routes.collections_url }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              widths: '600, 900, 1200, 1600',
+              sizes: '(min-width: 750px) 33vw, 100vw',
+              alt: block.settings.title
+          }}
+        {%- else -%}
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        <p class="evora-category__label">{{ block.settings.title }}</p>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EVORA categories",
+  "tag": "section",
+  "class": "section section--evora-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ev gereçleri"
+    },
+    {
+      "type": "textarea",
+      "id": "support",
+      "label": "Supporting sentence",
+      "default": "Mutfak, sofra ve günlük bakım için sade bir seçki."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Mutfak"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EVORA categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Mutfak" } },
+        { "type": "category", "settings": { "title": "Sofra" } },
+        { "type": "category", "settings": { "title": "Bakım" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

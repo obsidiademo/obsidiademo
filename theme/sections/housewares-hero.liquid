@@ -1,0 +1,112 @@
+{{ 'housewares-premium.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fetch_priority = 'high'
+  assign widths = '750, 1100, 1500, 1780, 2000, 3000, 3840'
+-%}
+
+<section
+  id="EvoraHero-{{ section.id }}"
+  class="evora-hero"
+  aria-label="{{ section.settings.brand | escape }}"
+>
+  <div class="evora-hero__media">
+    {%- if section.settings.image != blank -%}
+      {%- assign hero_alt = section.settings.image.alt | default: section.settings.brand -%}
+      {{
+        section.settings.image
+        | image_url: width: 3840
+        | image_tag:
+          widths: widths,
+          sizes: '100vw',
+          fetchpriority: fetch_priority,
+          loading: 'eager',
+          alt: hero_alt
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="evora-hero__veil" aria-hidden="true"></div>
+  <div class="evora-hero__content">
+    <p class="evora-hero__brand">{{ section.settings.brand }}</p>
+    {%- if section.settings.headline != blank -%}
+      <h1 class="evora-hero__headline">{{ section.settings.headline }}</h1>
+    {%- endif -%}
+    {%- if section.settings.support != blank -%}
+      <p class="evora-hero__support">{{ section.settings.support }}</p>
+    {%- endif -%}
+    <div class="evora-hero__ctas">
+      {%- if section.settings.cta_label != blank -%}
+        <a class="evora-btn evora-btn--primary" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_label != blank -%}
+        <a class="evora-btn evora-btn--ghost" href="{{ section.settings.cta_secondary_link | default: routes.collections_url }}">
+          {{ section.settings.cta_secondary_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EVORA housewares hero",
+  "tag": "section",
+  "class": "section section--evora-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Brand name",
+      "default": "EVORA"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Ev için seçilmiş gereçler"
+    },
+    {
+      "type": "textarea",
+      "id": "support",
+      "label": "Supporting sentence",
+      "default": "Sakin metal, temiz seramik ve günlük kullanımı yücelten mutfak atmosferi."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary CTA label",
+      "default": "Koleksiyonu keşfet"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary CTA label",
+      "default": "Mutfak"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Full-bleed hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "EVORA housewares hero"
+    }
+  ]
+}
+{% endschema %}
