@@ -1,0 +1,120 @@
+/* EVORA housewares layer on Discovery (T-Soft Twig)
+   Color tokens come from ayarlar/tema.json → sablon.twig :root
+   Primary pinks from zip: --main-color #b25d7e, --main-color2 #3e072c
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+.h-contact,
+.menu,
+.product-item,
+.footer {
+  font-family: var(--font-ui, "Quicksand", sans-serif) !important;
+}
+
+body {
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(178, 93, 126, 0.12), transparent 55%),
+    radial-gradient(90% 70% at 100% 8%, rgba(62, 7, 44, 0.08), transparent 50%),
+    linear-gradient(180deg, var(--evora-blush, #fff7fa) 0%, var(--evora-rose-mist, #f3e4eb) 100%) !important;
+  color: var(--main-color2, #3e072c);
+}
+
+/* Soft atmospheric wash */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    -18deg,
+    transparent,
+    transparent 18px,
+    rgba(178, 93, 126, 0.03) 18px,
+    rgba(178, 93, 126, 0.03) 19px
+  );
+}
+
+/* Menu / chrome already use --main-color from zip; tighten premium feel */
+header.desktop .h-contact {
+  background: var(--main-color, #b25d7e);
+}
+
+header.desktop .menu-area,
+.menu {
+  background: var(--menu-bg-color, #b25d7e) !important;
+}
+
+.btn-theme,
+.btn-orange,
+.btn-send,
+.product-item .btn-cart,
+a.btn-cart {
+  background: var(--main-color, #b25d7e) !important;
+  border-color: var(--main-color, #b25d7e) !important;
+  color: #fff !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  transition: background var(--transition-time, 0.4s ease-out), color var(--transition-time, 0.4s ease-out);
+}
+
+.btn-theme:hover,
+.btn-orange:hover,
+.btn-send:hover,
+.product-item .btn-cart:hover,
+a.btn-cart:hover {
+  background: var(--main-color2, #3e072c) !important;
+  border-color: var(--main-color2, #3e072c) !important;
+}
+
+/* Links & accents */
+a:hover,
+.product-item .title a:hover,
+.text-main {
+  color: var(--main-color, #b25d7e) !important;
+}
+
+/* Product cards: interactive containers only — no heavy card chrome */
+.product-item {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.product-item .image img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-item:hover .image img {
+  transform: scale(1.04);
+}
+
+/* Homepage banner / slider — full-bleed intent */
+.h-banner,
+.slider,
+.banner-area,
+.swiper-slide img {
+  border-radius: 0 !important;
+}
+
+/* Footer soft blush */
+.footer,
+footer {
+  background: linear-gradient(180deg, #fff7fa, #f3e4eb) !important;
+  border-top: 1px solid rgba(178, 93, 126, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-item .image img {
+    transition: none !important;
+    transform: none !important;
+  }
+}

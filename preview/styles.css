@@ -1,17 +1,25 @@
-/* EVORA — premium housewares visual system */
+/* EVORA — premium housewares visual system
+   Pink tokens derived from Discovery zip ayarlar/tema.json:
+   ana_renk #b25d7e, ana_renk_2 #3e072c, body blush #fff7fa
+*/
 :root {
-  --evora-porcelain: #f3f5f4;
-  --evora-mist: #e6ebe9;
-  --evora-ink: #1a1f1e;
-  --evora-muted: #5f6865;
-  --evora-steel: #7a8581;
-  --evora-sage: #3f6b64;
-  --evora-sage-deep: #2f524d;
+  --evora-porcelain: #fff7fa;
+  --evora-mist: #f3e4eb;
+  --evora-ink: #3e072c;
+  --evora-muted: #7a5568;
+  --evora-steel: #b25d7e;
+  --evora-sage: #b25d7e;
+  --evora-sage-deep: #3e072c;
+  --evora-pink: #b25d7e;
+  --evora-plum: #3e072c;
+  --evora-blush: #fff7fa;
+  --evora-rose-mist: #f3e4eb;
   --evora-surface: #ffffff;
-  --evora-line: rgba(26, 31, 30, 0.12);
+  --evora-line: rgba(62, 7, 44, 0.12);
   --evora-font: "Quicksand", "Trebuchet MS", sans-serif;
   --evora-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -42,8 +50,8 @@ h5,
 body {
   letter-spacing: 0.01em;
   background:
-    radial-gradient(120% 80% at 0% 0%, rgba(63, 107, 100, 0.08), transparent 55%),
-    radial-gradient(90% 70% at 100% 10%, rgba(122, 133, 129, 0.12), transparent 50%),
+    radial-gradient(120% 80% at 0% 0%, rgba(178, 93, 126, 0.12), transparent 55%),
+    radial-gradient(90% 70% at 100% 10%, rgba(62, 7, 44, 0.08), transparent 50%),
     linear-gradient(180deg, var(--evora-porcelain) 0%, var(--evora-mist) 100%);
   color: var(--evora-ink);
 }
@@ -60,13 +68,13 @@ body {
   pointer-events: none;
   z-index: -1;
   background:
-    linear-gradient(135deg, rgba(243, 245, 244, 0.92), rgba(230, 235, 233, 0.88)),
+    linear-gradient(135deg, rgba(255, 247, 250, 0.92), rgba(243, 228, 235, 0.88)),
     repeating-linear-gradient(
       -18deg,
       transparent,
       transparent 18px,
-      rgba(26, 31, 30, 0.015) 18px,
-      rgba(26, 31, 30, 0.015) 19px
+      rgba(178, 93, 126, 0.03) 18px,
+      rgba(178, 93, 126, 0.03) 19px
     );
 }
 
@@ -103,8 +111,8 @@ body {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(243, 245, 244, 0.92) 0%, rgba(243, 245, 244, 0.72) 38%, rgba(243, 245, 244, 0.18) 72%, transparent 100%),
-    linear-gradient(0deg, rgba(26, 31, 30, 0.18) 0%, transparent 42%);
+    linear-gradient(90deg, rgba(255, 247, 250, 0.92) 0%, rgba(255, 247, 250, 0.72) 38%, rgba(255, 247, 250, 0.18) 72%, transparent 100%),
+    linear-gradient(0deg, rgba(62, 7, 44, 0.22) 0%, transparent 42%);
 }
 
 .evora-hero__content {
@@ -180,7 +188,7 @@ body {
 
 .evora-btn--primary {
   background: var(--evora-sage);
-  color: #f7faf9;
+  color: #fff7fa;
 }
 
 .evora-btn--primary:hover {
@@ -270,7 +278,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #f7faf9;
+  color: #fff7fa;
 }
 
 .evora-category::after {
@@ -278,7 +286,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(0deg, rgba(26, 31, 30, 0.55) 0%, transparent 55%);
+  background: linear-gradient(0deg, rgba(62, 7, 44, 0.55) 0%, transparent 55%);
 }
 
 /* ——— Story band ——— */
@@ -313,7 +321,7 @@ body {
   gap: 1.2rem;
   padding: clamp(3.2rem, 7vw, 6.4rem) clamp(1.6rem, 5vw, 5.6rem);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(230, 235, 233, 0.9));
+    linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(243, 228, 235, 0.9));
 }
 
 .evora-story__copy h2 {
@@ -353,7 +361,7 @@ body {
 
 /* Header calm glass */
 .section-header .header-wrapper {
-  background: rgba(243, 245, 244, 0.82);
+  background: rgba(255, 247, 250, 0.86);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--evora-line);
 }
@@ -423,7 +431,7 @@ body {
 
   .evora-hero__veil {
     background:
-      linear-gradient(0deg, rgba(243, 245, 244, 0.94) 0%, rgba(243, 245, 244, 0.55) 42%, rgba(243, 245, 244, 0.2) 100%);
+      linear-gradient(0deg, rgba(255, 247, 250, 0.94) 0%, rgba(255, 247, 250, 0.55) 42%, rgba(255, 247, 250, 0.2) 100%);
   }
 
   .evora-hero__content {
@@ -454,7 +462,7 @@ body {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem clamp(1.6rem, 5vw, 6rem);
-  background: rgba(243, 245, 244, 0.86);
+  background: rgba(255, 247, 250, 0.86);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--evora-line);
   font-family: var(--evora-font);
